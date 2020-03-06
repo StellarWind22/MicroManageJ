@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class CommandRegistry {
 
-	private static ArrayList<Command> cmds = new ArrayList<Command>();
+	private static ArrayList<Command> registry = new ArrayList<Command>();
 	
 	//Register
 	public static void register(Command cmdIn) {
 		
-		cmds.add(cmdIn);
+		registry.add(cmdIn);
 	}
 	
 	//RegisterAll
@@ -24,49 +24,49 @@ public class CommandRegistry {
 	//Deregister
 	public static void deRegister(Command cmdIn) {
 		
-		for(Command cmd : cmds) {
+		for(Command cmd : registry) {
 			
 			if(cmd.equals(cmdIn)) {
 				
-				cmds.remove(cmdIn);
+				registry.remove(cmdIn);
 			}
 		}
 	}
 	
 	//contains
-	public static boolean contains(Command cmdIn) {
+	public static boolean contains(Command command) {
 		
-		for(Command cmd : cmds) {
-			
-			if(cmd.equals(cmdIn)) {
-				
-				return true;
-			}
-		}
-		return false;
+		return registry.contains(command);
 	}
 	
 	public static boolean contains(String labelIn) {
 		
-		for(Command cmd: cmds) {
-			
-			if(cmd.getLabel().equalsIgnoreCase(labelIn)) {
-				return true;
-			}
-		}
-		return false;
+		return registry.contains(get(labelIn));
 	}
 	
 	//getCommand
-	public static Command getFromLabel(String labelIn) {
+	public static Command get(String labelIn) {
 		
-		for(Command cmd : cmds) {
+		for(Command cmd : registry) {
 			
 			if(cmd.getLabel().equalsIgnoreCase(labelIn)) {
 				
-				return cmd;
+				return cmd.getCommand();
 			}
 		}
 		return null;
+	}
+	
+	//getAll
+	public static Command[] getAll() {
+		
+		ArrayList<Command> cmdsOut = new ArrayList<Command>();
+		
+		for(Command cmd : registry) {
+			
+			cmdsOut.add(cmd);
+		}
+		
+		return (Command[]) cmdsOut.toArray();
 	}
 }

@@ -22,52 +22,27 @@ public class Main {
 		//Register Commands
 		Init.regCommands();
 		
-		//Register Events
-		Init.regEventListeners();
-		
 		//Login to Discord
 		Init.login(args);
 		
+		//"Console"
+		Scanner keyboard = new Scanner(System.in);
 		
-		//Start up console
-		openConsole();
+		String inp = "";
 		
-	}
-	
-	private static void openConsole()
-	{
-		Scanner inp = new Scanner(System.in);
+		while(!(inp.startsWith(prefix + "shutdown"))) {
 		
-		String consoleIn = labeledInput("Command: ", inp);
-		
-		while(consoleIn != prefix + "shutdown")
-		{
-			consoleIn = labeledInput("Command: ", inp);
+			inp = keyboard.nextLine();
 			
-			String[] consoleArgs = consoleIn.split(" ");
-			String label = consoleArgs[0].replaceFirst(prefix, "");
-			
-			
-			
-			//If you type prefix + say broadcast message in chat
-			if(label == "say")
-			{
-				MsgHandler.sendMsgBroadcast("general", String.join(" ", consoleArgs).replaceFirst(Main.prefix + "say", "").trim(), 1);
-			}
-			else 
-			{
-				System.out.print("Invalid Command");
+			if(inp.startsWith(prefix + "say")) {
+				
+				MsgHandler.sendMsgBroadcast("general", inp.replaceFirst(prefix + "say", "").trim(), 1);
+				continue;
 			}
 		}
+		
+		//Exit Program
+		keyboard.close();
 		System.exit(0);
-	}
-	
-	private static String labeledInput(String label, Scanner scanner) {
-		
-		System.out.print(label);
-		String inp = scanner.nextLine();
-		System.out.print("\n");
-		
-		return inp;
 	}
 }

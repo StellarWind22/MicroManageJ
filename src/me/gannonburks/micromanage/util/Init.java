@@ -6,8 +6,8 @@ import me.gannonburks.micromanage.Main;
 import me.gannonburks.micromanage.command.CommandRegistry;
 import me.gannonburks.micromanage.commands.DirectMessageCommand;
 import me.gannonburks.micromanage.commands.EchoCommand;
-import me.gannonburks.micromanage.event.OnGuildMessageEvent;
-import me.gannonburks.micromanage.event.OnPrivateMessageEvent;
+import me.gannonburks.micromanage.commands.ShutdownCommand;
+import me.gannonburks.micromanage.event.OnMessageReceivedEvent;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -22,7 +22,9 @@ public class Init {
 			
 			try {				//Try to log in
 				
-				Main.bot = new JDABuilder(AccountType.BOT).setToken(args[0]).build();
+				Main.bot = new JDABuilder(AccountType.BOT)
+						.addEventListeners(new OnMessageReceivedEvent())
+						.setToken(args[0]).build();
 				
 			} catch (LoginException e) {
 				
@@ -39,20 +41,12 @@ public class Init {
 	}
 	
 	/*
-	 * Register events
-	 */
-	public static void regEventListeners()
-	{
-		Main.bot.addEventListener(new OnGuildMessageEvent());
-		Main.bot.addEventListener(new OnPrivateMessageEvent());
-	}
-	
-	/*
 	 * Register commands
 	 */
 	public static void regCommands() {
 		
 		CommandRegistry.register(new EchoCommand("echo").getCommand());
 		CommandRegistry.register(new DirectMessageCommand("dm").getCommand());	
+		CommandRegistry.register(new ShutdownCommand("shutdown").getCommand());
 	}
 }

@@ -26,9 +26,4 @@ public class Command implements ICommand {
 	public String getLabel() {
 		return label;
 	}
-	
-	//Label Setter
-	public void setLabel(String labelIn) {
-		label = labelIn;
-	}
 }

@@ -29,9 +29,8 @@ public class MsgHandler {
 			{
 				
 				//Break when limit reached
-				if(loops == channelLimit) 
+				if(loops >= channelLimit) 
 				{
-					
 					break;
 				} 
 				else 
@@ -55,7 +54,7 @@ public class MsgHandler {
 		for(String msgChunk : msg.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
 		{
 			//Send in discord-safe chunks
-			channel.sendMessage(msgChunk);
+			channel.sendMessage(msgChunk).queue();;
 		}
 	}
 	
@@ -70,19 +69,23 @@ public class MsgHandler {
 		
 		for(User user : Main.bot.getUsersByName(name, true)) {
 			
-			if(loops >= userLimit) {
-				
+			if(loops >= userLimit)
+			{	
 				break;
-			} else {
-				
+			}
+			else
+			{
+				//Send Private Message
 				user.openPrivateChannel().queue((channel) -> {
 					
 					for(String msgChunk : msg.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
 					{
 						//Send in discord-safe chunks
-						channel.sendMessage(msgChunk);
+						channel.sendMessage(msgChunk).queue();;
 					}
 				});
+				
+				if(userLimit != 0) loops++;
 			}
 		}
 	}
@@ -96,7 +99,7 @@ public class MsgHandler {
 		for(String msgChunk : msg.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
 		{
 			//Send in discord-safe chunks
-			channel.sendMessage(msgChunk);
+			channel.sendMessage(msgChunk).queue();;
 		}
 	}
 }

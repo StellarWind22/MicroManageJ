@@ -18,6 +18,8 @@ public class CmdHandler {
 			
 			TextChannel txtChannel = (TextChannel) channel;
 			
+			
+			
 			if(!(CommandRegistry.contains(label)))			//If that command doesn't exist send message
 			{
 				MsgHandler.sendMsgGuild(txtChannel, "\"" + label + "\" is not a valid command!");
@@ -25,7 +27,7 @@ public class CmdHandler {
 			}
 			
 			//Fire command with args
-			CommandRegistry.getFromLabel(label).fireInGuild(args, sender, txtChannel);;
+			CommandRegistry.get(label).fireInGuild(args, sender, txtChannel);;
 			return;
 			
 		} else if(channel instanceof PrivateChannel) {		//Private Channel Stuff
@@ -38,7 +40,7 @@ public class CmdHandler {
 			}
 			
 			//Fire command with args
-			CommandRegistry.getFromLabel(label).fireInPrivate(args, sender, prvChannel);
+			CommandRegistry.get(label).fireInPrivate(args, sender, prvChannel);
 			return;
 			
 		} else {

@@ -2,16 +2,16 @@ package me.gannonburks.micromanage.commands;
 
 import me.gannonburks.micromanage.Main;
 import me.gannonburks.micromanage.command.Command;
+import me.gannonburks.micromanage.command.ICommand;
 import me.gannonburks.micromanage.util.MsgHandler;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 
-public class DirectMessageCommand extends Command {
+public class DirectMessageCommand extends Command implements ICommand{
 
 	public DirectMessageCommand(String labelIn) {
 		super(labelIn);
-		
 	}
 	
 	@Override
