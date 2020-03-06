@@ -17,7 +17,7 @@ public class EchoCommand extends Command {
 	@Override
 	public void fireInGuild(String[] args, User sender, TextChannel channel) {
 		
-		String msg = String.join(" ", args).replaceAll(Main.prefix + this.getLabel(), "");
+		String msg = String.join(" ", args).replaceFirst(Main.prefix + this.getLabel(), "").trim();
 		
 		MsgHandler.sendMsgGuild(channel, msg);
 	}
@@ -25,7 +25,7 @@ public class EchoCommand extends Command {
 	@Override
 	public void fireInPrivate(String[] args, User sender, PrivateChannel channel) {
 		
-		String msg = String.join(" ", args).replaceAll(Main.prefix + this.getLabel(), "");
+		String msg = String.join(" ", args).replaceFirst(Main.prefix + this.getLabel(), "").trim();
 		
 		MsgHandler.sendMsgPrivate(channel, msg);
 	}

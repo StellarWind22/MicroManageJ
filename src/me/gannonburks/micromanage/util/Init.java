@@ -38,19 +38,19 @@ public class Init {
 	}
 	
 	/*
+	 * Register events
+	 */
+	public static void regEventListeners()
+	{
+		Main.bot.addEventListener(new OnGetMsg());
+	}
+	
+	/*
 	 * Register commands
 	 */
 	public static void regCommands() {
 		
 		CommandRegistry.register(new EchoCommand("echo").getCommand());
 		CommandRegistry.register(new DirectMessageCommand("dm").getCommand());	
-	}
-	
-	/*
-	 * Register events
-	 */
-	public static void regEventListeners()
-	{
-		Main.bot.addEventListener(new OnGetMsg());
 	}
 }
