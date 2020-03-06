@@ -9,13 +9,13 @@ import okhttp3.EventListener;
 public class OnPrivateMessageEvent extends EventListener {
 
 	@SubscribeEvent
-	public void onGetMsgDirect(PrivateMessageReceivedEvent e) {
+	public void onGetMsgDirect(PrivateMessageReceivedEvent event) {
 		
-		String[] args = e.getMessage().getContentRaw().split(" ");
+		String[] args = event.getMessage().getContentRaw().split(" ");
 		
 		if(CmdHandler.isCmd(args[0]))	//If any message starts with the prefix attempt to execute
 		{	
-			CmdHandler.executeCommand(args[0].replaceFirst(Main.prefix, ""), args, e.getAuthor(), e.getChannel());
+			CmdHandler.executeCommand(args[0].replaceFirst(Main.prefix, ""), args, event.getAuthor(), event.getChannel());
 		}
 	}
 }
