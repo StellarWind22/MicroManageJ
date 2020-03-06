@@ -6,7 +6,8 @@ import me.gannonburks.micromanage.Main;
 import me.gannonburks.micromanage.command.CommandRegistry;
 import me.gannonburks.micromanage.commands.DirectMessageCommand;
 import me.gannonburks.micromanage.commands.EchoCommand;
-import me.gannonburks.micromanage.event.OnGetMsg;
+import me.gannonburks.micromanage.event.OnGuildMessageEvent;
+import me.gannonburks.micromanage.event.OnPrivateMessageEvent;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -42,7 +43,8 @@ public class Init {
 	 */
 	public static void regEventListeners()
 	{
-		Main.bot.addEventListener(new OnGetMsg());
+		Main.bot.addEventListener(new OnGuildMessageEvent());
+		Main.bot.addEventListener(new OnPrivateMessageEvent());
 	}
 	
 	/*

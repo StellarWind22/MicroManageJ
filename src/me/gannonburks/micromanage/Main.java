@@ -30,20 +30,33 @@ public class Main {
 		
 		
 		//Start up console
+		openConsole();
+		
+	}
+	
+	private static void openConsole()
+	{
 		Scanner inp = new Scanner(System.in);
 		
 		String consoleIn = labeledInput("Command: ", inp);
 		
-		while(consoleIn != prefix + "shutdown") {
-			
+		while(consoleIn != prefix + "shutdown")
+		{
 			consoleIn = labeledInput("Command: ", inp);
 			
 			String[] consoleArgs = consoleIn.split(" ");
 			String label = consoleArgs[0].replaceFirst(prefix, "");
 			
-			if(label == "say") {
-				
-				MsgHandler.sendMsgBroadcast("general", String.join(" ", args).replaceFirst(Main.prefix + "say", "").trim(), 1);
+			
+			
+			//If you type prefix + say broadcast message in chat
+			if(label == "say")
+			{
+				MsgHandler.sendMsgBroadcast("general", String.join(" ", consoleArgs).replaceFirst(Main.prefix + "say", "").trim(), 1);
+			}
+			else 
+			{
+				System.out.print("Invalid Command");
 			}
 		}
 		System.exit(0);
@@ -53,6 +66,7 @@ public class Main {
 		
 		System.out.print(label);
 		String inp = scanner.nextLine();
+		System.out.print("\n");
 		
 		return inp;
 	}
