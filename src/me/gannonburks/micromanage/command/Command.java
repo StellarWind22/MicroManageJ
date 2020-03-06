@@ -13,7 +13,9 @@ public class Command implements ICommand {
 		label = labelIn.toLowerCase();
 	}
 	
-	//Command Fire Event
+	/*
+	 * COMMAND FIRE EVENTS
+	 */
 	public void fireInGuild(String[] args, User sender, TextChannel channel)
 	{
 		return;

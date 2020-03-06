@@ -46,7 +46,7 @@ public class CmdHandler {
 		} else {
 			
 			Main.LOG.severe("Object fed into command fire event was not a TextChannel or PrivateChannel!");
-			System.exit(0);
+			Main.shutdown();
 		}
 		
 	}

@@ -43,6 +43,10 @@ public class Main {
 		
 		//Exit Program
 		keyboard.close();
+	}
+	
+	public static void shutdown() {
+		
 		System.exit(0);
 	}
 }

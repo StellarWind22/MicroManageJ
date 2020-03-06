@@ -29,14 +29,14 @@ public class Init {
 			} catch (LoginException e) {
 				
 				Main.LOG.severe("Auth token invalid!");
-				System.exit(0);
+				Main.shutdown();
 			}
 			
 		} else {
 			
 			//Ask for valid token
 			Main.LOG.severe("Enter an auth token as the first argument!");;
-			System.exit(0);
+			Main.shutdown();
 		}
 	}
 	

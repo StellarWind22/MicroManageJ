@@ -1,5 +1,6 @@
 package me.gannonburks.micromanage.commands;
 
+import me.gannonburks.micromanage.Main;
 import me.gannonburks.micromanage.command.Command;
 import me.gannonburks.micromanage.command.ICommand;
 import net.dv8tion.jda.api.entities.PrivateChannel;
@@ -15,12 +16,18 @@ public class ShutdownCommand extends Command implements ICommand {
 	@Override
 	public void fireInGuild(String[] args, User sender, TextChannel channel) {
 		
-		System.exit(0);
+		Main.shutdown();
 	}
 	
 	@Override
 	public void fireInPrivate(String[] args, User sender, PrivateChannel channel) {
 		
-		System.exit(0);
+		Main.shutdown();
+	}
+	
+	@Override
+	public void fireInConsole(String args) {
+		
+		Main.shutdown();
 	}
 }
