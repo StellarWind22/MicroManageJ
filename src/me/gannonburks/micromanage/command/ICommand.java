@@ -16,6 +16,11 @@ public interface ICommand {
 		return;	
 	}
 	
+	default void fireInConsole(String[] args)
+	{
+		return;
+	}
+	
 	default Command getCommand()
 	{	
 		return (Command)this;

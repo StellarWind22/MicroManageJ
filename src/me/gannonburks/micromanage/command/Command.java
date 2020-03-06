@@ -8,22 +8,30 @@ public class Command implements ICommand {
 
 	private static String label;
 	
-	public Command(String labelIn) {
-		
+	public Command(String labelIn)
+	{	
 		label = labelIn.toLowerCase();
 	}
 	
 	//Command Fire Event
-	public void fireInGuild(String[] args, User sender, TextChannel channel) {
+	public void fireInGuild(String[] args, User sender, TextChannel channel)
+	{
 		return;
 	}
 	
-	public void fireInPrivate(String[] args, User sender, PrivateChannel channel) {
+	public void fireInPrivate(String[] args, User sender, PrivateChannel channel)
+	{
+		return;
+	}
+	
+	public void fireInConsole(String args)
+	{
 		return;
 	}
 	
 	//Label Getter
-	public String getLabel() {
+	public String getLabel()
+	{
 		return label;
 	}
 }
