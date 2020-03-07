@@ -6,10 +6,10 @@ import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 
-public class CmdHandler {
+public class CommandHandler {
 	
 	/*
-	 * BIG BOI STUFF
+	 * COMMAND EXECUTION STUFF
 	 */
 	public final static void executeCommand(String label, String[] args, User sender, Object channel) {
 		
@@ -22,7 +22,7 @@ public class CmdHandler {
 			
 			if(!(CommandRegistry.contains(label)))			//If that command doesn't exist send message
 			{
-				MsgHandler.sendMsgGuild(txtChannel, "\"" + label + "\" is not a valid command!");
+				MessageHandler.sendMsgGuild(txtChannel, "\"" + label + "\" is not a valid command!");
 				return;
 			}
 			
@@ -36,7 +36,7 @@ public class CmdHandler {
 			
 			if(!(CommandRegistry.contains(label))) 			//If that command doesn't exist send message
 			{
-				MsgHandler.sendMsgPrivate(prvChannel, "\"" + label + "\" is not a valid command!");
+				MessageHandler.sendMsgPrivate(prvChannel, "\"" + label + "\" is not a valid command!");
 			}
 			
 			//Fire command with args
@@ -49,6 +49,17 @@ public class CmdHandler {
 			Main.shutdown();
 		}
 		
+	}
+	
+	public final static void executeCommand(String label, String[] args) {
+		
+		if(!(CommandRegistry.contains(label)))
+		{
+			System.out.println("\"" + label + "\" is not a valid command!");
+			return;
+		}
+		
+		CommandRegistry.get(label).fireInConsole(args);
 	}
 	
 	//Check for prefix

@@ -1,7 +1,7 @@
 package me.gannonburks.micromanage.event;
 
 import me.gannonburks.micromanage.Main;
-import me.gannonburks.micromanage.util.CmdHandler;
+import me.gannonburks.micromanage.util.CommandHandler;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -19,9 +19,9 @@ public class OnMessageReceivedEvent extends ListenerAdapter {
 		String[] args = event.getMessage().getContentRaw().split(" ");
 		
 		//If any message starts with the prefix attempt to execute
-		if(CmdHandler.isCmd(args[0]))
+		if(CommandHandler.isCmd(args[0]))
 		{	
-			CmdHandler.executeCommand(args[0].replaceFirst(Main.prefix, ""), args, event.getAuthor(), event.getChannel());
+			CommandHandler.executeCommand(args[0].replaceFirst(Main.prefix, ""), args, event.getAuthor(), event.getChannel());
 		}
 	}
 	
@@ -36,9 +36,9 @@ public class OnMessageReceivedEvent extends ListenerAdapter {
 		String[] args = event.getMessage().getContentRaw().split(" ");
 		
 		//If any message starts with the prefix attempt to execute
-		if(CmdHandler.isCmd(args[0]))
+		if(CommandHandler.isCmd(args[0]))
 		{	
-			CmdHandler.executeCommand(args[0].replaceFirst(Main.prefix, ""), args, event.getAuthor(), event.getChannel());
+			CommandHandler.executeCommand(args[0].replaceFirst(Main.prefix, ""), args, event.getAuthor(), event.getChannel());
 		}
 	}
 }

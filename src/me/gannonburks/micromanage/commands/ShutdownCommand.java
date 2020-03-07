@@ -26,7 +26,7 @@ public class ShutdownCommand extends Command implements ICommand {
 	}
 	
 	@Override
-	public void fireInConsole(String args) {
+	public void fireInConsole(String[] args) {
 		
 		Main.shutdown();
 	}

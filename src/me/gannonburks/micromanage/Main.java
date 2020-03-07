@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 import me.gannonburks.micromanage.util.Init;
-import me.gannonburks.micromanage.util.MsgHandler;
+import me.gannonburks.micromanage.util.MessageHandler;
 import net.dv8tion.jda.api.JDA;
 
 public class Main {
@@ -36,7 +36,7 @@ public class Main {
 			
 			if(inp.startsWith(prefix + "say")) {
 				
-				MsgHandler.sendMsgBroadcast("general", inp.replaceFirst(prefix + "say", "").trim(), 1);
+				MessageHandler.sendMsgBroadcast("general", inp.replaceFirst(prefix + "say", "").trim(), 1);
 				continue;
 			}
 		}
