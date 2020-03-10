@@ -3,6 +3,7 @@ package me.gannonburks.micromanage;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import me.gannonburks.micromanage.util.CommandHandler;
 import me.gannonburks.micromanage.util.Init;
 import me.gannonburks.micromanage.util.MessageHandler;
 import net.dv8tion.jda.api.JDA;
@@ -34,15 +35,19 @@ public class Main {
 		
 			inp = keyboard.nextLine();
 			
-			if(inp.startsWith(prefix + "say")) {
+			if(CommandHandler.isCmd(inp)) {
 				
-				MessageHandler.sendMsgBroadcast("general", inp.replaceFirst(prefix + "say", "").trim(), 1);
-				continue;
+				//Split input into args
+				String[] consoleArgs = inp.split(" ");
+				String label = consoleArgs[0].replaceFirst(prefix, "");
+				
+				CommandHandler.executeCommand(label, consoleArgs);
 			}
 		}
 		
 		//Exit Program
 		keyboard.close();
+		shutdown();
 	}
 	
 	public static void shutdown() {
