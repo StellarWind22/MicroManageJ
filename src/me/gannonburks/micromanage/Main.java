@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 
 import me.gannonburks.micromanage.util.CommandHandler;
 import me.gannonburks.micromanage.util.Init;
-import me.gannonburks.micromanage.util.MessageHandler;
 import net.dv8tion.jda.api.JDA;
 
 public class Main {
