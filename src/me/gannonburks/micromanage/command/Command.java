@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.User;
 
 public class Command implements ICommand {
 
-	private static String label;
+	private String label;
 	
 	public Command(String labelIn)
 	{	
@@ -26,7 +26,7 @@ public class Command implements ICommand {
 		return;
 	}
 	
-	public void fireInConsole(String args)
+	public static void fireInConsole(String args)
 	{
 		return;
 	}

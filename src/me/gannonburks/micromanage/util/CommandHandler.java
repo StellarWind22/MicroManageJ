@@ -37,6 +37,7 @@ public class CommandHandler {
 			if(!(CommandRegistry.contains(label))) 			//If that command doesn't exist send message
 			{
 				MessageHandler.sendMsgPrivate(prvChannel, "\"" + label + "\" is not a valid command!");
+				return;
 			}
 			
 			//Fire command with args

@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.entities.User;
 
 public interface ICommand {
 	
+	
 	default void fireInGuild(String[] args, User sender, TextChannel channel)
 	{
 		return;	
@@ -21,18 +22,9 @@ public interface ICommand {
 		return;
 	}
 	
+	
 	default Command getCommand()
 	{	
 		return (Command)this;
-	}
-	
-	default String getLabel()
-	{
-		return null;
-	}
-	
-	default void setLabel(String labelIn)
-	{
-		return;
 	}
 }
