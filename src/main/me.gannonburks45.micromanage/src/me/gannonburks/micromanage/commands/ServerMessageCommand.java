@@ -19,7 +19,7 @@ public class ServerMessageCommand extends Command {
 		String server = args[1];
 		String serverChannel = args[2];
 		
-		String msg = String.join(" ", args).replaceAll(Main.prefix + this.getLabel(), "").replaceFirst(server, "").replaceFirst(serverChannel, "").trim();
+		String msg = String.join(" ", args).replaceAll(Main.PREFIX + this.getLabel(), "").replaceFirst(server, "").replaceFirst(serverChannel, "").trim();
 		
 		MessageHandler.sendMsgGuildByName(server, serverChannel, msg, 1, 1);
 	}
@@ -30,7 +30,7 @@ public class ServerMessageCommand extends Command {
 		String server = args[1];
 		String serverChannel = args[2];
 		
-		String msg = String.join(" ", args).replaceAll(Main.prefix + this.getLabel(), "").replaceFirst(server, "").replaceFirst(serverChannel, "").trim();
+		String msg = String.join(" ", args).replaceAll(Main.PREFIX + this.getLabel(), "").replaceFirst(server, "").replaceFirst(serverChannel, "").trim();
 		
 		MessageHandler.sendMsgGuildByName(server, serverChannel, msg, 1, 1);
 	}
@@ -41,7 +41,7 @@ public class ServerMessageCommand extends Command {
 		String server = args[1];
 		String serverChannel = args[2];
 		
-		String msg = String.join(" ", args).replaceAll(Main.prefix + this.getLabel(), "").replaceFirst(server, "").replaceFirst(serverChannel, "").trim();
+		String msg = String.join(" ", args).replaceAll(Main.PREFIX + this.getLabel(), "").replaceFirst(server, "").replaceFirst(serverChannel, "").trim();
 		
 		MessageHandler.sendMsgGuildByName(server, serverChannel, msg, 1, 1);
 	}

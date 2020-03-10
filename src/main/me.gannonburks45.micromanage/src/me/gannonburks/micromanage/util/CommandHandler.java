@@ -22,7 +22,7 @@ public class CommandHandler {
 			
 			if(!(CommandRegistry.contains(label)))			//If that command doesn't exist send message
 			{
-				MessageHandler.sendMsgGuild(txtChannel, "\"" + label + "\" is not a valid command!");
+				MessageHandler.sendMsgGuild(txtChannel, "\"" + label + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
 				return;
 			}
 			
@@ -36,7 +36,7 @@ public class CommandHandler {
 			
 			if(!(CommandRegistry.contains(label))) 			//If that command doesn't exist send message
 			{
-				MessageHandler.sendMsgPrivate(prvChannel, "\"" + label + "\" is not a valid command!");
+				MessageHandler.sendMsgPrivate(prvChannel, "\"" + label + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
 				return;
 			}
 			
@@ -56,7 +56,7 @@ public class CommandHandler {
 		
 		if(!(CommandRegistry.contains(label)))
 		{
-			System.out.println("\"" + label + "\" is not a valid command!");
+			System.out.println("\"" + label + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
 			return;
 		}
 		
@@ -66,6 +66,6 @@ public class CommandHandler {
 	//Check for prefix
 	public static boolean isCmd(String cmd) {
 		
-		return cmd.toLowerCase().startsWith(Main.prefix);
+		return cmd.toLowerCase().startsWith(Main.PREFIX);
 	}
 }

@@ -17,7 +17,7 @@ public class PrivateMessageCommand extends Command {
 	public void fireInGuild(String[] args, User sender, TextChannel channel) {
 		
 		String recipient = args[1];
-		String msg = String.join(" ", args).replaceAll(Main.prefix + this.getLabel(), "").replaceFirst(recipient, "").trim();
+		String msg = String.join(" ", args).replaceAll(Main.PREFIX + this.getLabel(), "").replaceFirst(recipient, "").trim();
 		
 		MessageHandler.sendMsgPrivateByName(recipient, msg, 1);
 	}
@@ -26,7 +26,7 @@ public class PrivateMessageCommand extends Command {
 	public void fireInPrivate(String[] args, User sender, PrivateChannel channel) {
 		
 		String recipient = args[1];
-		String msg = String.join(" ", args).replaceAll(Main.prefix + this.getLabel(), "").replaceFirst(recipient, "").trim();
+		String msg = String.join(" ", args).replaceAll(Main.PREFIX + this.getLabel(), "").replaceFirst(recipient, "").trim();
 		
 		MessageHandler.sendMsgPrivateByName(recipient, msg, 1);
 	}
@@ -35,7 +35,7 @@ public class PrivateMessageCommand extends Command {
 	public void fireInConsole(String[] args) {
 		
 		String recipient = args[1];
-		String msg = String.join(" ", args).replaceAll(Main.prefix + this.getLabel(), "").replaceFirst(recipient, "").trim();
+		String msg = String.join(" ", args).replaceAll(Main.PREFIX + this.getLabel(), "").replaceFirst(recipient, "").trim();
 		
 		MessageHandler.sendMsgPrivateByName(recipient, msg, 1);
 	}

@@ -10,7 +10,7 @@ public class Main {
 	public static JDA bot;
 	
 	//Global Stuff
-	public static final String prefix = "-";
+	public static final String PREFIX = "-";
 	
 	/*
 	 * PROGRAM ENTRY POINT

@@ -8,7 +8,9 @@ import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.CommandRegistry;
+import src.me.gannonburks.micromanage.commands.DisableCommand;
 import src.me.gannonburks.micromanage.commands.EchoCommand;
+import src.me.gannonburks.micromanage.commands.HelpCommand;
 import src.me.gannonburks.micromanage.commands.PrivateMessageCommand;
 import src.me.gannonburks.micromanage.commands.ServerMessageCommand;
 import src.me.gannonburks.micromanage.commands.ShutdownCommand;
@@ -48,10 +50,12 @@ public class Init {
 	 */
 	public static void regCommands() {
 		
-		CommandRegistry.register(new EchoCommand("echo").getCommand());
-		CommandRegistry.register(new PrivateMessageCommand("pm").getCommand());	
-		CommandRegistry.register(new ServerMessageCommand("sm").getCommand());
-		CommandRegistry.register(new ShutdownCommand("shutdown").getCommand());
+		CommandRegistry.register(new HelpCommand("help"));
+		CommandRegistry.register(new EchoCommand("echo"));
+		CommandRegistry.register(new PrivateMessageCommand("pm"));	
+		CommandRegistry.register(new ServerMessageCommand("sm"));
+		CommandRegistry.register(new DisableCommand("disable"));
+		CommandRegistry.register(new ShutdownCommand("shutdown"));
 	}
 	
 	/*
@@ -62,14 +66,14 @@ public class Init {
 		Scanner keyboard = new Scanner(System.in);
 		String inp = "";
 		
-		while(!(inp.startsWith(Main.prefix + "shutdown")))
+		while(!(inp.startsWith(Main.PREFIX + "shutdown")))
 		{
 		
 			inp = keyboard.nextLine();
 			
 			//Split input into args
 			String[] consoleArgs = inp.split(" ");
-			String label = consoleArgs[0].replaceFirst(Main.prefix, "");
+			String label = consoleArgs[0].replaceFirst(Main.PREFIX, "");
 			
 			if(CommandHandler.isCmd(inp))
 			{

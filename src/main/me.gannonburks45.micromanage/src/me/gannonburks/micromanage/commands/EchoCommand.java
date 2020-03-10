@@ -16,7 +16,7 @@ public class EchoCommand extends Command {
 	@Override
 	public void fireInGuild(String[] args, User sender, TextChannel channel) {
 		
-		String msg = String.join(" ", args).replaceFirst(Main.prefix + this.getLabel(), "").trim();
+		String msg = String.join(" ", args).replaceFirst(Main.PREFIX + this.getLabel(), "").trim();
 		
 		MessageHandler.sendMsgGuild(channel, msg);
 	}
@@ -24,7 +24,7 @@ public class EchoCommand extends Command {
 	@Override
 	public void fireInPrivate(String[] args, User sender, PrivateChannel channel) {
 		
-		String msg = String.join(" ", args).replaceFirst(Main.prefix + this.getLabel(), "").trim();
+		String msg = String.join(" ", args).replaceFirst(Main.PREFIX + this.getLabel(), "").trim();
 		
 		MessageHandler.sendMsgPrivate(channel, msg);
 	}
@@ -32,7 +32,7 @@ public class EchoCommand extends Command {
 	@Override
 	public void fireInConsole(String[] args) {
 		
-		String msg = String.join(" ", args).replaceFirst(Main.prefix + this.getLabel(), "").trim();
+		String msg = String.join(" ", args).replaceFirst(Main.PREFIX + this.getLabel(), "").trim();
 		
 		MessageHandler.sendMsgBroadcast("general", msg, 1);
 	}
