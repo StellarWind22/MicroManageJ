@@ -6,11 +6,18 @@ import net.dv8tion.jda.api.entities.User;
 
 public class Command implements ICommand {
 
+	//Meta Stuff
 	private String label;
+	private String description;
 	
-	public Command(String labelIn)
+	//Disable-able stuff
+	private boolean disabled = false;
+	private boolean canDisable = true;
+	
+	public Command(String labelIn, String descriptionIn)
 	{	
 		label = labelIn.toLowerCase();
+		description = descriptionIn;
 	}
 	
 	/*
@@ -34,6 +41,32 @@ public class Command implements ICommand {
 	//Label Getter
 	public String getLabel()
 	{
-		return label;
+		return this.label;
+	}
+
+	//Description Getter
+	public String getDescription()
+	{
+		return this.description;
+	}
+
+	//Disabled getter
+	public boolean isDisabled()
+	{
+		return this.disabled;
+	}
+
+	//Disabled setter
+	public void setDisabled(boolean disabledIn)
+	{
+		this.disabled = disabledIn;
+	}
+
+	public boolean canDisable() {
+		return this.canDisable;
+	}
+
+	public void setCanDisable(boolean canDisableIn) {
+		this.canDisable = canDisableIn;
 	}
 }

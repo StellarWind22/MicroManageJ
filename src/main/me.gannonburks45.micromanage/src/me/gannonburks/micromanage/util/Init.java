@@ -50,12 +50,12 @@ public class Init {
 	 */
 	public static void regCommands() {
 		
-		CommandRegistry.register(new HelpCommand("help"));
-		CommandRegistry.register(new EchoCommand("echo"));
-		CommandRegistry.register(new PrivateMessageCommand("pm"));	
-		CommandRegistry.register(new ServerMessageCommand("sm"));
-		CommandRegistry.register(new DisableCommand("disable"));
-		CommandRegistry.register(new ShutdownCommand("shutdown"));
+		CommandRegistry.register(new HelpCommand("help", null));
+		CommandRegistry.register(new EchoCommand("echo", "Repeats message."));
+		CommandRegistry.register(new PrivateMessageCommand("pm","Sends a private message to someone."));	
+		CommandRegistry.register(new ServerMessageCommand("sm","Sends a message to a specific server in a specific channel."));
+		CommandRegistry.register(new DisableCommand("disable", "Disables a command."));
+		CommandRegistry.register(new ShutdownCommand("shutdown", "Shuts down the bot."));
 	}
 	
 	/*

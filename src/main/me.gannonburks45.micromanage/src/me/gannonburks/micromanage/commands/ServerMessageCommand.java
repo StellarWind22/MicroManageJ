@@ -9,13 +9,13 @@ import src.me.gannonburks.micromanage.util.MessageHandler;
 
 public class ServerMessageCommand extends Command {
 
-	public ServerMessageCommand(String labelIn) {
-		super(labelIn);
+	public ServerMessageCommand(String labelIn, String descriptionIn) {
+		super(labelIn, descriptionIn);
 	}
 
 	@Override
-	public void fireInGuild(String[] args, User sender, TextChannel channel) {
-		
+	public void fireInGuild(String[] args, User sender, TextChannel channel)
+	{
 		String server = args[1];
 		String serverChannel = args[2];
 		
@@ -25,8 +25,8 @@ public class ServerMessageCommand extends Command {
 	}
 	
 	@Override
-	public void fireInPrivate(String[] args, User sender, PrivateChannel channel) {
-		
+	public void fireInPrivate(String[] args, User sender, PrivateChannel channel)
+	{
 		String server = args[1];
 		String serverChannel = args[2];
 		
@@ -36,8 +36,8 @@ public class ServerMessageCommand extends Command {
 	}
 	
 	@Override
-	public void fireInConsole(String[] args) {
-		
+	public void fireInConsole(String[] args)
+	{
 		String server = args[1];
 		String serverChannel = args[2];
 		

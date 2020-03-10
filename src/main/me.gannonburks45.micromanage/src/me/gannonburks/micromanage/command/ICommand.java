@@ -22,7 +22,6 @@ public interface ICommand {
 		return;
 	}
 	
-	
 	default Command getCommand()
 	{	
 		return (Command)this;

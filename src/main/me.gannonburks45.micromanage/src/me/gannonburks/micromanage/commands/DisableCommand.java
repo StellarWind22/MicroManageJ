@@ -8,8 +8,8 @@ import src.me.gannonburks.micromanage.command.CommandRegistry;
 
 public class DisableCommand extends Command {
 
-	public DisableCommand(String labelIn) {
-		super(labelIn);
+	public DisableCommand(String labelIn, String descriptionIn) {
+		super(labelIn, descriptionIn);
 	}
 	
 	@Override

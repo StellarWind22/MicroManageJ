@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.util.CommandHandler;
+import src.me.gannonburks.micromanage.util.Logger;
 
 public class OnMessageReceivedEvent extends ListenerAdapter {
 
@@ -14,6 +15,8 @@ public class OnMessageReceivedEvent extends ListenerAdapter {
 		//Ignore own messages
 		if(event.getAuthor() == Main.bot.getSelfUser()) return;
 		
+		//Got Message
+		Logger.info("Got Message: \"" + event.getMessage().getContentRaw() + "\" from server: \"" + event.getGuild().getName() + "\" in channel: \"" + event.getChannel().getName() + "\" from: \"" + event.getAuthor().getName() + "\".");
 		
 		//Format Input
 		String[] args = event.getMessage().getContentRaw().split(" ");
@@ -30,6 +33,9 @@ public class OnMessageReceivedEvent extends ListenerAdapter {
 		
 		//Ignore own messages
 		if(event.getAuthor() == Main.bot.getSelfUser()) return;
+		
+		//Got Message
+		Logger.info("Got Message: \"" + event.getMessage().getContentRaw() + "\" from: \"" + event.getAuthor().getName() + "\".");
 		
 		
 		//Format Input
