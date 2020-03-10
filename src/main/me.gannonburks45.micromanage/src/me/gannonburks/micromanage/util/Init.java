@@ -8,9 +8,9 @@ import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.CommandRegistry;
+import src.me.gannonburks.micromanage.commands.EchoCommand;
 import src.me.gannonburks.micromanage.commands.PrivateMessageCommand;
 import src.me.gannonburks.micromanage.commands.ServerMessageCommand;
-import src.me.gannonburks.micromanage.commands.EchoCommand;
 import src.me.gannonburks.micromanage.commands.ShutdownCommand;
 import src.me.gannonburks.micromanage.event.OnMessageReceivedEvent;
 
@@ -31,14 +31,14 @@ public class Init {
 				
 			} catch (LoginException e) {
 				
-				Main.LOG.severe("Auth token invalid!");
+				Logger.error("Invalid Auth token!");
 				Main.shutdown();
 			}
 			
 		} else {
 			
 			//Ask for valid token
-			Main.LOG.severe("Enter an auth token as the first argument!");;
+			Logger.error("Please input a authorization token as the first argument!");
 			Main.shutdown();
 		}
 	}

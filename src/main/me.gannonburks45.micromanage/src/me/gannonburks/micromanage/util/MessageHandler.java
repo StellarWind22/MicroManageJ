@@ -61,7 +61,8 @@ public class MessageHandler {
 		for(String msgChunk : msgIn.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
 		{
 			//Send in discord-safe chunks
-			channelIn.sendMessage(msgChunk).queue();;
+			channelIn.sendMessage(msgChunk).queue();
+			Logger.info("Sent message: \"" + msgIn + "\" to: \"" + channelIn.getUser().getName() + "\".");
 		}
 	}
 	
@@ -92,7 +93,8 @@ public class MessageHandler {
 					for(String msgChunk : msgIn.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
 					{
 						//Send in discord-safe chunks
-						channel.sendMessage(msgChunk).queue();;
+						channel.sendMessage(msgChunk).queue();
+						Logger.info("Sent message: \"" + msgIn + "\" to: \"" + user.getName() + "\".");
 					}
 				});
 				
@@ -114,7 +116,8 @@ public class MessageHandler {
 		for(String msgChunk : msgIn.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
 		{
 			//Send in discord-safe chunks
-			channelIn.sendMessage(msgChunk).queue();;
+			channelIn.sendMessage(msgChunk).queue();
+			Logger.info("Sent message: \"" + msgIn + "\" to server: \"" + channelIn.getGuild().getName() + "\" in channel: \"" + channelIn.getName() + "\".");
 		}
 	}
 	

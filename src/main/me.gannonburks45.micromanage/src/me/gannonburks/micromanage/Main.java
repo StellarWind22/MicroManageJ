@@ -1,15 +1,13 @@
 package src.me.gannonburks.micromanage;
 
-import java.util.logging.Logger;
-
 import net.dv8tion.jda.api.JDA;
 import src.me.gannonburks.micromanage.util.Init;
+import src.me.gannonburks.micromanage.util.Logger;
 
 public class Main {
 
 	//Instantiate stuff
 	public static JDA bot;
-	public static final Logger LOG = Logger.getLogger("MicroManage");
 	
 	//Global Stuff
 	public static final String prefix = "-";
@@ -31,6 +29,7 @@ public class Main {
 	
 	public static void shutdown()
 	{	
+		Logger.info("Bot shutting down!");
 		System.exit(0);
 	}
 }
