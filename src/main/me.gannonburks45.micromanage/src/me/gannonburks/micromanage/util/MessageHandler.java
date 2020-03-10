@@ -13,11 +13,14 @@ public class MessageHandler {
 	
 	
 	/*
-	 * BROADCAST TO MULTIPLE SERVERS
+	 * Broadcast message to multiple servers in channels with the same name
 	 * 
-	 * if limit = 0 then there is no limit!
+	 * @param String channelIn		name of channels to send message to.
+	 * @param String msgIn			message to be sent.
+	 * 
+	 * @param int channelLimit		number of channels with matching names in each server to send the message to.	0 = unlimited
 	 */
-	public static void sendMsgBroadcast(String channel, String msg, int channelLimit)
+	public static void sendMsgBroadcast(String channelIn, String msgIn, int channelLimit)
 	{
 		
 		for(Guild guild : Main.bot.getGuilds()) 
@@ -25,7 +28,7 @@ public class MessageHandler {
 			
 			int loops = 0;
 			
-			for(TextChannel txtChannel : guild.getTextChannelsByName(channel, true)) 
+			for(TextChannel txtChannel : guild.getTextChannelsByName(channelIn, true)) 
 			{
 				
 				//Break when limit reached
@@ -36,7 +39,7 @@ public class MessageHandler {
 				else 
 				{
 					
-					sendMsgGuild(txtChannel, msg);		//Send using nice formatted method with pagination
+					sendMsgGuild(txtChannel, msgIn);	//Send using nice formatted method with pagination
 					
 					if(channelLimit != 0 ) loops++;		//Iterate on loops if limits enabled
 				}
@@ -47,27 +50,35 @@ public class MessageHandler {
 	
 	
 	/*
-	 * MESSAGE SPECIFIC USER
+	 * Send message directly to private channel
+	 * 
+	 * @param PrivateChannel channelIn		channel to send message to.
+	 * 
+	 * @param String msgIn					message to be sent.
 	 */
-	public static void sendMsgPrivate(PrivateChannel channel, String msg) {
+	public static void sendMsgPrivate(PrivateChannel channelIn, String msgIn) {
 		
-		for(String msgChunk : msg.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
+		for(String msgChunk : msgIn.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
 		{
 			//Send in discord-safe chunks
-			channel.sendMessage(msgChunk).queue();;
+			channelIn.sendMessage(msgChunk).queue();;
 		}
 	}
 	
 	/*
-	 * Send message to users with similar name
+	 * Send message to user via name
 	 * 
-	 * if limit = 0 there is no limit
+	 * @param String nameIn		name of user to send message to.
+	 * @param String msgIn		message to be sent to the user.
+	 * 
+	 * @param int userLimit		number of users with matching names to send message to	0 = unlimited
 	 */
-	public static void sendMsgPrivateByName(String name, String msg, int userLimit) {
+	public static void sendMsgPrivateByName(String nameIn, String msgIn, int userLimit) {
 		
 		int loops = 0;
 		
-		for(User user : Main.bot.getUsersByName(name, true)) {
+		for(User user : Main.bot.getUsersByName(nameIn, true))
+		{
 			
 			if(loops >= userLimit)
 			{	
@@ -78,7 +89,7 @@ public class MessageHandler {
 				//Send Private Message
 				user.openPrivateChannel().queue((channel) -> {
 					
-					for(String msgChunk : msg.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
+					for(String msgChunk : msgIn.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
 					{
 						//Send in discord-safe chunks
 						channel.sendMessage(msgChunk).queue();;
@@ -92,14 +103,65 @@ public class MessageHandler {
 	
 	
 	/*
-	 * Send message directly to a defined channel
+	 * Send message directly to guild channel
+	 * 
+	 * @param TextChannel channelIn		channel to send the message to.
+	 * 
+	 * @param String msgIn				message to be sent.
 	 */
-	public static void sendMsgGuild(TextChannel channel, String msg) {
+	public static void sendMsgGuild(TextChannel channelIn, String msgIn) {
 		
-		for(String msgChunk : msg.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
+		for(String msgChunk : msgIn.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
 		{
 			//Send in discord-safe chunks
-			channel.sendMessage(msgChunk).queue();;
+			channelIn.sendMessage(msgChunk).queue();;
+		}
+	}
+	
+	/*
+	 * Send message to guild via name
+	 * 
+	 * @param String guildIn	name of guild to send message to.
+	 * @param String channelIn	name of channel to send message in.
+	 * @param String msgIn		message to be sent.
+	 * 
+	 * @param int guildLimit	number of guild(s) with matching names to send it to .			0 = unlimited
+	 * @param int channelLimit	number of channel(s) with matching names to send message in.	0 = unlimited
+	 */
+	public static void sendMsgGuildByName(String guildIn, String channelIn, String msgIn, int guildLimit, int channelLimit)
+	{
+		
+		int loopsG = 0;
+		
+		for(Guild guild : Main.bot.getGuildsByName(guildIn, true))
+		{
+			
+			if(loopsG >= guildLimit)
+			{	
+				break;
+			}
+			else
+			{
+				int loopsC = 0;
+				
+				for(TextChannel txtChannel : guild.getTextChannelsByName(channelIn, true))
+				{
+					
+					if(loopsC >= channelLimit)
+					{
+						break;
+					}
+					else
+					{
+						
+						sendMsgGuild(txtChannel, msgIn);
+						
+						if(channelLimit != 0) loopsC++;
+					}
+				}
+				
+				if(guildLimit != 0) loopsG++;
+			}
 		}
 	}
 }

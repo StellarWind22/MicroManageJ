@@ -1,12 +1,15 @@
 package src.me.gannonburks.micromanage.util;
 
+import java.util.Scanner;
+
 import javax.security.auth.login.LoginException;
 
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.CommandRegistry;
-import src.me.gannonburks.micromanage.commands.DirectMessageCommand;
+import src.me.gannonburks.micromanage.commands.PrivateMessageCommand;
+import src.me.gannonburks.micromanage.commands.ServerMessageCommand;
 import src.me.gannonburks.micromanage.commands.EchoCommand;
 import src.me.gannonburks.micromanage.commands.ShutdownCommand;
 import src.me.gannonburks.micromanage.event.OnMessageReceivedEvent;
@@ -46,7 +49,40 @@ public class Init {
 	public static void regCommands() {
 		
 		CommandRegistry.register(new EchoCommand("echo").getCommand());
-		CommandRegistry.register(new DirectMessageCommand("dm").getCommand());	
+		CommandRegistry.register(new PrivateMessageCommand("pm").getCommand());	
+		CommandRegistry.register(new ServerMessageCommand("sm").getCommand());
 		CommandRegistry.register(new ShutdownCommand("shutdown").getCommand());
+	}
+	
+	/*
+	 * Console Method
+	 */
+	public static void console() {
+		
+		Scanner keyboard = new Scanner(System.in);
+		String inp = "";
+		
+		while(!(inp.startsWith(Main.prefix + "shutdown")))
+		{
+		
+			inp = keyboard.nextLine();
+			
+			//Split input into args
+			String[] consoleArgs = inp.split(" ");
+			String label = consoleArgs[0].replaceFirst(Main.prefix, "");
+			
+			if(CommandHandler.isCmd(inp))
+			{
+				CommandHandler.executeCommand(label, consoleArgs);
+			}
+			else
+			{
+				System.out.println("\"" + label + "\" is not a valid command!");
+			}
+		}
+		
+		//Exit Program
+		keyboard.close();
+		Main.shutdown();
 	}
 }

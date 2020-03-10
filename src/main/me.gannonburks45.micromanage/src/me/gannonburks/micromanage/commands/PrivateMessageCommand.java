@@ -5,12 +5,11 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.Command;
-import src.me.gannonburks.micromanage.command.ICommand;
 import src.me.gannonburks.micromanage.util.MessageHandler;
 
-public class DirectMessageCommand extends Command implements ICommand{
+public class PrivateMessageCommand extends Command {
 
-	public DirectMessageCommand(String labelIn) {
+	public PrivateMessageCommand(String labelIn) {
 		super(labelIn);
 	}
 	
