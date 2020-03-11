@@ -1,10 +1,11 @@
-package src.me.gannonburks.micromanage.util;
+package src.me.gannonburks.micromanage.command;
 
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import src.me.gannonburks.micromanage.Main;
-import src.me.gannonburks.micromanage.command.CommandRegistry;
+import src.me.gannonburks.micromanage.util.Logger;
+import src.me.gannonburks.micromanage.util.MessageHandler;
 
 public class CommandHandler {
 	

@@ -7,6 +7,7 @@ import javax.security.auth.login.LoginException;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import src.me.gannonburks.micromanage.Main;
+import src.me.gannonburks.micromanage.command.CommandHandler;
 import src.me.gannonburks.micromanage.command.CommandRegistry;
 import src.me.gannonburks.micromanage.command.commands.DisableCommand;
 import src.me.gannonburks.micromanage.command.commands.EchoCommand;
@@ -16,7 +17,6 @@ import src.me.gannonburks.micromanage.command.commands.PrivateMessageCommand;
 import src.me.gannonburks.micromanage.command.commands.ServerMessageCommand;
 import src.me.gannonburks.micromanage.command.commands.ShutdownCommand;
 import src.me.gannonburks.micromanage.event.events.OnMessageReceivedEvent;
-import src.me.gannonburks.micromanage.util.CommandHandler;
 import src.me.gannonburks.micromanage.util.Logger;
 
 public class Init {
