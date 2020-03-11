@@ -1,4 +1,4 @@
-package src.me.gannonburks.micromanage.commands;
+package src.me.gannonburks.micromanage.command.commands;
 
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -35,6 +35,6 @@ public class EchoCommand extends Command {
 	{
 		String msg = String.join(" ", args).replaceFirst(Main.PREFIX + this.getLabel(), "").trim();
 		
-		MessageHandler.sendMsgBroadcast("general", msg, 1);
+		System.out.println(msg);
 	}
 }

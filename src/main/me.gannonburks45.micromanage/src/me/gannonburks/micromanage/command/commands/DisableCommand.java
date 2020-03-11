@@ -1,4 +1,4 @@
-package src.me.gannonburks.micromanage.commands;
+package src.me.gannonburks.micromanage.command.commands;
 
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -8,9 +8,9 @@ import src.me.gannonburks.micromanage.command.Command;
 import src.me.gannonburks.micromanage.command.CommandRegistry;
 import src.me.gannonburks.micromanage.util.MessageHandler;
 
-public class EnableCommand extends Command {
+public class DisableCommand extends Command {
 
-	public EnableCommand(String labelIn, boolean canDisableIn, String descriptionIn)
+	public DisableCommand(String labelIn, boolean canDisableIn, String descriptionIn)
 	{
 		super(labelIn, canDisableIn, descriptionIn);
 	}
@@ -28,15 +28,24 @@ public class EnableCommand extends Command {
 		
 		Command cmd = CommandRegistry.get(commandlabel, true);
 		
-		if(!(cmd.isDisabled()))
-		{	
-			MessageHandler.sendMsgGuild(channel, "\"" + commandlabel + "\" is already enabled!");
-			return;
+		if(cmd.canDisable())
+		{
+			
+			if(cmd.isDisabled())
+			{	
+				MessageHandler.sendMsgGuild(channel, "\"" + commandlabel + "\" is already disabled!");
+				return;
+			}
+			else
+			{
+				cmd.setDisabled(true);
+				MessageHandler.sendMsgGuild(channel, "\"" + commandlabel + "\" is now disabled!");
+				return;
+			}
 		}
 		else
 		{
-			cmd.setDisabled(false);
-			MessageHandler.sendMsgGuild(channel, "\"" + commandlabel + "\" is now enabled!");
+			MessageHandler.sendMsgGuild(channel, "\"" + commandlabel + "\" cannot be disabled!");
 			return;
 		}
 	}
@@ -44,7 +53,6 @@ public class EnableCommand extends Command {
 	@Override
 	public void fireInPrivate(String[] args, User sender, PrivateChannel channel)
 	{
-		
 		String commandlabel = args[1];
 		
 		if(!(CommandRegistry.contains(commandlabel, true)))
@@ -55,15 +63,24 @@ public class EnableCommand extends Command {
 		
 		Command cmd = CommandRegistry.get(commandlabel, true);
 		
-		if(!(cmd.isDisabled()))
-		{	
-			MessageHandler.sendMsgPrivate(channel, "\"" + commandlabel + "\" is already enabled!");
-			return;
+		if(cmd.canDisable())
+		{
+			
+			if(cmd.isDisabled())
+			{	
+				MessageHandler.sendMsgPrivate(channel, "\"" + commandlabel + "\" is already disabled!");
+				return;
+			}
+			else
+			{
+				cmd.setDisabled(true);
+				MessageHandler.sendMsgPrivate(channel, "\"" + commandlabel + "\" is now disabled!");
+				return;
+			}
 		}
 		else
 		{
-			cmd.setDisabled(false);
-			MessageHandler.sendMsgPrivate(channel, "\"" + commandlabel + "\" is now enabled!");
+			MessageHandler.sendMsgPrivate(channel, "\"" + commandlabel + "\" cannot be disabled!");
 			return;
 		}
 	}
@@ -71,7 +88,6 @@ public class EnableCommand extends Command {
 	@Override
 	public void fireInConsole(String[] args)
 	{
-		
 		String commandlabel = args[1];
 		
 		if(!(CommandRegistry.contains(commandlabel, true)))
@@ -82,15 +98,24 @@ public class EnableCommand extends Command {
 		
 		Command cmd = CommandRegistry.get(commandlabel, true);
 		
-		if(!(cmd.isDisabled()))
-		{	
-			System.out.println("\"" + commandlabel + "\" is already enabled!");
-			return;
+		if(cmd.canDisable())
+		{
+			
+			if(cmd.isDisabled())
+			{	
+				System.out.println("\"" + commandlabel + "\" is already disabled!");
+				return;
+			}
+			else
+			{
+				cmd.setDisabled(true);
+				System.out.println("\"" + commandlabel + "\" is now disabled!");
+				return;
+			}
 		}
 		else
 		{
-			cmd.setDisabled(false);
-			System.out.println("\"" + commandlabel + "\" is now enabled!");
+			System.out.println("\"" + commandlabel + "\" cannot be disabled!");
 			return;
 		}
 	}

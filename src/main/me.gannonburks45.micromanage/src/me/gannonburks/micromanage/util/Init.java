@@ -8,14 +8,14 @@ import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.CommandRegistry;
-import src.me.gannonburks.micromanage.commands.DisableCommand;
-import src.me.gannonburks.micromanage.commands.EchoCommand;
-import src.me.gannonburks.micromanage.commands.EnableCommand;
-import src.me.gannonburks.micromanage.commands.HelpCommand;
-import src.me.gannonburks.micromanage.commands.PrivateMessageCommand;
-import src.me.gannonburks.micromanage.commands.ServerMessageCommand;
-import src.me.gannonburks.micromanage.commands.ShutdownCommand;
-import src.me.gannonburks.micromanage.event.OnMessageReceivedEvent;
+import src.me.gannonburks.micromanage.command.commands.DisableCommand;
+import src.me.gannonburks.micromanage.command.commands.EchoCommand;
+import src.me.gannonburks.micromanage.command.commands.EnableCommand;
+import src.me.gannonburks.micromanage.command.commands.HelpCommand;
+import src.me.gannonburks.micromanage.command.commands.PrivateMessageCommand;
+import src.me.gannonburks.micromanage.command.commands.ServerMessageCommand;
+import src.me.gannonburks.micromanage.command.commands.ShutdownCommand;
+import src.me.gannonburks.micromanage.events.OnMessageReceivedEvent;
 
 public class Init {
 

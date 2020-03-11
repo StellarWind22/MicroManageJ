@@ -1,4 +1,4 @@
-package src.me.gannonburks.micromanage.commands;
+package src.me.gannonburks.micromanage.command.commands;
 
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
