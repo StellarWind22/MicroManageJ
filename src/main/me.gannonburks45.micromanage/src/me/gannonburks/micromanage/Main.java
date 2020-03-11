@@ -1,7 +1,7 @@
 package src.me.gannonburks.micromanage;
 
 import net.dv8tion.jda.api.JDA;
-import src.me.gannonburks.micromanage.util.Init;
+import src.me.gannonburks.micromanage.init.Init;
 import src.me.gannonburks.micromanage.util.Logger;
 
 public class Main {

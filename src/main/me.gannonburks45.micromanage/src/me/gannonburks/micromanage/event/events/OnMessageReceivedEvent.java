@@ -1,4 +1,4 @@
-package src.me.gannonburks.micromanage.events;
+package src.me.gannonburks.micromanage.event.events;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;

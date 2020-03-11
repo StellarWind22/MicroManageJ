@@ -41,7 +41,9 @@ public class Command implements ICommand {
 		this.disabled = disabledIn;
 	}
 
-	public boolean canDisable() {
+	//canDisable getter
+	public boolean canDisable()
+	{
 		return this.canDisable;
 	}
 }

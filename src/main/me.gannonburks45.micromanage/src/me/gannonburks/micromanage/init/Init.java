@@ -1,4 +1,4 @@
-package src.me.gannonburks.micromanage.util;
+package src.me.gannonburks.micromanage.init;
 
 import java.util.Scanner;
 
@@ -15,7 +15,9 @@ import src.me.gannonburks.micromanage.command.commands.HelpCommand;
 import src.me.gannonburks.micromanage.command.commands.PrivateMessageCommand;
 import src.me.gannonburks.micromanage.command.commands.ServerMessageCommand;
 import src.me.gannonburks.micromanage.command.commands.ShutdownCommand;
-import src.me.gannonburks.micromanage.events.OnMessageReceivedEvent;
+import src.me.gannonburks.micromanage.event.events.OnMessageReceivedEvent;
+import src.me.gannonburks.micromanage.util.CommandHandler;
+import src.me.gannonburks.micromanage.util.Logger;
 
 public class Init {
 
@@ -26,14 +28,14 @@ public class Init {
 		
 		if(args.length > 0) {	//Check for a argument
 			
-			try {				//Try to log in
-				
+			try
+			{	//Try to log in
 				Main.bot = new JDABuilder(AccountType.BOT)
 						.addEventListeners(new OnMessageReceivedEvent())
 						.setToken(args[0]).build();
-				
-			} catch (LoginException e) {
-				
+			}
+			catch (LoginException e)
+			{
 				Logger.error("Invalid Auth token!");
 				Main.shutdown();
 			}
@@ -49,8 +51,8 @@ public class Init {
 	/*
 	 * Register commands
 	 */
-	public static void regCommands() {
-		
+	public static void regCommands()
+	{
 		CommandRegistry.register(new HelpCommand("help", false, null));
 		CommandRegistry.register(new EchoCommand("echo", true, "Repeats message."));
 		CommandRegistry.register(new PrivateMessageCommand("pm", true,"Sends a private message to someone."));	
