@@ -10,9 +10,9 @@ import src.me.gannonburks.micromanage.util.MessageHandler;
 
 public class HelpCommand extends Command {
 
-	public HelpCommand(String labelIn, boolean canDisableIn, String descriptionIn)
+	public HelpCommand(String labelIn, boolean canDisableIn, boolean canRunInPrivateIn, String descriptionIn)
 	{
-		super(labelIn, canDisableIn, descriptionIn);
+		super(labelIn, canDisableIn, canRunInPrivateIn, descriptionIn);
 	}
 	
 	@Override
@@ -24,7 +24,7 @@ public class HelpCommand extends Command {
 		{
 			if(cmd.getLabel() == this.getLabel()) continue;		//Ignore self
 			
-			MessageHandler.sendMsgGuild(channel,"   " +  Main.PREFIX + cmd.getLabel() + "    " + cmd.getDescription());
+			MessageHandler.sendMsgGuild(channel,"   " +  Main.DEFAULT_PREFIX + cmd.getLabel() + "    " + cmd.getDescription());
 		}
 	}
 	
@@ -37,7 +37,7 @@ public class HelpCommand extends Command {
 		{
 			if(cmd.getLabel() == this.getLabel()) continue;		//Ignore self
 			
-			MessageHandler.sendMsgPrivate(channel,"   " + Main.PREFIX + cmd.getLabel() + "    " + cmd.getDescription());
+			MessageHandler.sendMsgPrivate(channel,"   " + Main.DEFAULT_PREFIX + cmd.getLabel() + "    " + cmd.getDescription());
 		}
 	}
 	
@@ -50,7 +50,7 @@ public class HelpCommand extends Command {
 		{
 			if(cmd.getLabel() == this.getLabel()) continue;		//Ignore self
 			
-			System.out.println("   " + Main.PREFIX + cmd.getLabel() + "    " + cmd.getDescription());
+			System.out.println("   " + Main.DEFAULT_PREFIX + cmd.getLabel() + "    " + cmd.getDescription());
 		}
 	}
 }

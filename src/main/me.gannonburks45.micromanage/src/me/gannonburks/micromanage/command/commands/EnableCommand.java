@@ -1,6 +1,5 @@
 package src.me.gannonburks.micromanage.command.commands;
 
-import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import src.me.gannonburks.micromanage.Main;
@@ -11,9 +10,9 @@ import src.me.gannonburks.micromanage.util.MessageHandler;
 
 public class EnableCommand extends Command {
 
-	public EnableCommand(String labelIn, boolean canDisableIn, String descriptionIn)
+	public EnableCommand(String labelIn, boolean canDisableIn, boolean canRunInPrivateIn, String descriptionIn)
 	{
-		super(labelIn, canDisableIn, descriptionIn);
+		super(labelIn, canDisableIn, canRunInPrivateIn, descriptionIn);
 	}
 	
 	@Override
@@ -23,7 +22,7 @@ public class EnableCommand extends Command {
 		
 		if(!(ServerRegistry.get(channel.getGuild().getName()).getCommandRegistry().contains(commandlabel, true)))
 		{
-			MessageHandler.sendMsgGuild(channel, "\"" + commandlabel + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
+			MessageHandler.sendMsgGuild(channel, "\"" + commandlabel + "\" is not a valid command, try " + Main.DEFAULT_PREFIX + "help for a list of commands!");
 			return;
 		}
 		
@@ -43,13 +42,6 @@ public class EnableCommand extends Command {
 	}
 	
 	@Override
-	public void fireInPrivate(String[] args, User sender, PrivateChannel channel)
-	{
-		MessageHandler.sendMsgPrivate(channel, "\"" + this.getLabel() + "\" does not work in a private message channel!");
-		return;
-	}
-	
-	@Override
 	public void fireInConsole(String[] args)
 	{
 		
@@ -57,7 +49,7 @@ public class EnableCommand extends Command {
 		
 		if(!(ServerRegistry.get("default").getCommandRegistry().contains(commandlabel, true)))
 		{
-			System.out.println("\"" + commandlabel + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
+			System.out.println("\"" + commandlabel + "\" is not a valid command, try " + Main.DEFAULT_PREFIX + "help for a list of commands!");
 			return;
 		}
 		

@@ -10,15 +10,18 @@ import src.me.gannonburks.micromanage.command.CommandRegistry;
 public class Server implements IServer {
 
 	private String name;
+	private String prefix;
+	
 	private List<TextChannel> txtChannels;
 	private List<VoiceChannel> vocChannels;
 	
 	private Guild guild;
 	private CommandRegistry registry;
 	
-	public Server(Guild guildIn, CommandRegistry registryIn)
+	public Server(Guild guildIn, String prefixIn, CommandRegistry registryIn)
 	{
 		this.guild = guildIn;
+		this.prefix = prefixIn;
 		this.registry = registryIn;
 		
 		this.name = guildIn.getName();
@@ -26,9 +29,11 @@ public class Server implements IServer {
 		this.vocChannels = guildIn.getVoiceChannels();
 	}
 	
-	public Server(String nameIn,CommandRegistry registryIn)
+	public Server(String nameIn, String prefixIn, CommandRegistry registryIn)
 	{
 		this.name = nameIn;
+		this.prefix = prefixIn;
+		
 		this.registry = registryIn;
 	}
 	
@@ -60,5 +65,15 @@ public class Server implements IServer {
 	public List<VoiceChannel> getVoiceChannels()
 	{
 		return this.vocChannels;
+	}
+
+	//getter for prefix
+	public String getPrefix() {
+		return prefix;
+	}
+
+	//setter for prefix
+	public void setPrefix(String prefixIn) {
+		this.prefix = prefixIn;
 	}
 }

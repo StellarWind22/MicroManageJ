@@ -9,9 +9,9 @@ import src.me.gannonburks.micromanage.util.MessageHandler;
 
 public class ServerMessageCommand extends Command {
 
-	public ServerMessageCommand(String labelIn, boolean canDisableIn, String descriptionIn)
+	public ServerMessageCommand(String labelIn, boolean canDisableIn, boolean canRunInPrivateIn, String descriptionIn)
 	{
-		super(labelIn, canDisableIn, descriptionIn);
+		super(labelIn, canDisableIn, canRunInPrivateIn, descriptionIn);
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class ServerMessageCommand extends Command {
 		String server = args[1];
 		String serverChannel = args[2];
 		
-		String msg = String.join(" ", args).replaceAll(Main.PREFIX + this.getLabel(), "").replaceFirst(server, "").replaceFirst(serverChannel, "").trim();
+		String msg = String.join(" ", args).replaceAll(Main.DEFAULT_PREFIX + this.getLabel(), "").replaceFirst(server, "").replaceFirst(serverChannel, "").trim();
 		
 		MessageHandler.sendMsgGuildByName(server, serverChannel, msg, 1, 1);
 	}
@@ -31,7 +31,7 @@ public class ServerMessageCommand extends Command {
 		String server = args[1];
 		String serverChannel = args[2];
 		
-		String msg = String.join(" ", args).replaceAll(Main.PREFIX + this.getLabel(), "").replaceFirst(server, "").replaceFirst(serverChannel, "").trim();
+		String msg = String.join(" ", args).replaceAll(Main.DEFAULT_PREFIX + this.getLabel(), "").replaceFirst(server, "").replaceFirst(serverChannel, "").trim();
 		
 		MessageHandler.sendMsgGuildByName(server, serverChannel, msg, 1, 1);
 	}
@@ -42,7 +42,7 @@ public class ServerMessageCommand extends Command {
 		String server = args[1];
 		String serverChannel = args[2];
 		
-		String msg = String.join(" ", args).replaceAll(Main.PREFIX + this.getLabel(), "").replaceFirst(server, "").replaceFirst(serverChannel, "").trim();
+		String msg = String.join(" ", args).replaceAll(Main.DEFAULT_PREFIX + this.getLabel(), "").replaceFirst(server, "").replaceFirst(serverChannel, "").trim();
 		
 		MessageHandler.sendMsgGuildByName(server, serverChannel, msg, 1, 1);
 	}

@@ -24,7 +24,7 @@ public class CommandHandler {
 			
 			if(!(ServerRegistry.get(txtChannel.getGuild().getName()).getCommandRegistry().contains(label, false)))			//If that command doesn't exist send message
 			{
-				MessageHandler.sendMsgGuild(txtChannel, "\"" + label + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
+				MessageHandler.sendMsgGuild(txtChannel, "\"" + label + "\" is not a valid command, try " + Main.DEFAULT_PREFIX + "help for a list of commands!");
 				return;
 			}
 			
@@ -38,8 +38,13 @@ public class CommandHandler {
 			
 			if(!(ServerRegistry.get("default").getCommandRegistry().contains(label, false))) 			//If that command doesn't exist send message
 			{
-				MessageHandler.sendMsgPrivate(prvChannel, "\"" + label + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
+				MessageHandler.sendMsgPrivate(prvChannel, "\"" + label + "\" is not a valid command, try " + Main.DEFAULT_PREFIX + "help for a list of commands!");
 				return;
+			}
+			
+			if(!(ServerRegistry.get("default").getCommandRegistry().get(label, false).canRunInPrivate()))
+			{
+				MessageHandler.sendMsgPrivate(prvChannel, "\"" + label + "\" does not work in a private message channel!");
 			}
 			
 			//Fire command with args
@@ -59,7 +64,7 @@ public class CommandHandler {
 		
 		if(!(ServerRegistry.get("default").getCommandRegistry().contains(label, false)))
 		{
-			System.out.println("\"" + label + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
+			System.out.println("\"" + label + "\" is not a valid command, try " + Main.DEFAULT_PREFIX + "help for a list of commands!");
 			return;
 		}
 		
@@ -70,6 +75,6 @@ public class CommandHandler {
 	//Check for prefix
 	public static boolean isCmd(String cmd) {
 		
-		return cmd.toLowerCase().startsWith(Main.PREFIX);
+		return cmd.toLowerCase().startsWith(Main.DEFAULT_PREFIX);
 	}
 }

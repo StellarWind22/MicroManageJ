@@ -11,7 +11,7 @@ public class Main {
 	public static JDA bot;
 	
 	//Global Stuff
-	public static final String PREFIX = "-";
+	public static final String DEFAULT_PREFIX = "-";
 	
 	/*
 	 * PROGRAM ENTRY POINT

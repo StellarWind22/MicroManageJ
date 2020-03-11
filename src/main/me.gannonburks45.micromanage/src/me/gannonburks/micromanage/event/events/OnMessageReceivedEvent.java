@@ -28,7 +28,7 @@ public class OnMessageReceivedEvent extends BotEvent {
 		//If any message starts with the prefix attempt to execute
 		if(CommandHandler.isCmd(args[0]))
 		{	
-			CommandHandler.executeCommand(args[0].replaceFirst(Main.PREFIX, ""), args, event.getAuthor(), event.getChannel());
+			CommandHandler.executeCommand(args[0].replaceFirst(Main.DEFAULT_PREFIX, ""), args, event.getAuthor(), event.getChannel());
 		}
 	}
 	
@@ -48,7 +48,7 @@ public class OnMessageReceivedEvent extends BotEvent {
 		//If any message starts with the prefix attempt to execute
 		if(CommandHandler.isCmd(args[0]))
 		{	
-			CommandHandler.executeCommand(args[0].replaceFirst(Main.PREFIX, ""), args, event.getAuthor(), event.getChannel());
+			CommandHandler.executeCommand(args[0].replaceFirst(Main.DEFAULT_PREFIX, ""), args, event.getAuthor(), event.getChannel());
 		}
 	}
 }

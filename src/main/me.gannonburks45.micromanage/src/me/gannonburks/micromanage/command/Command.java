@@ -10,10 +10,14 @@ public class Command implements ICommand {
 	private boolean disabled = false;
 	private boolean canDisable = true;
 	
-	public Command(String labelIn, boolean canDisableIn, String descriptionIn)
+	//Server Stuff
+	private boolean canRunInPrivate = true;
+	
+	public Command(String labelIn, boolean canDisableIn, boolean canRunInPrivateIn, String descriptionIn)
 	{	
 		this.label = labelIn.toLowerCase();
 		this.canDisable = canDisableIn;
+		this.canRunInPrivate = canRunInPrivateIn;
 		this.description = descriptionIn;
 	}
 	
@@ -45,5 +49,10 @@ public class Command implements ICommand {
 	public boolean canDisable()
 	{
 		return this.canDisable;
+	}
+
+	//canRunInPrivate getter
+	public boolean canRunInPrivate() {
+		return this.canRunInPrivate;
 	}
 }

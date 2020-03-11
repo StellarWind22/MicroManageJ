@@ -48,14 +48,14 @@ public class Init {
 		Scanner keyboard = new Scanner(System.in);
 		String inp = "";
 		
-		while(!(inp.startsWith(Main.PREFIX + "shutdown")))
+		while(!(inp.startsWith(Main.DEFAULT_PREFIX + "shutdown")))
 		{
 		
 			inp = keyboard.nextLine();
 			
 			//Split input into args
 			String[] consoleArgs = inp.split(" ");
-			String label = consoleArgs[0].replaceFirst(Main.PREFIX, "");
+			String label = consoleArgs[0].replaceFirst(Main.DEFAULT_PREFIX, "");
 			
 			if(CommandHandler.isCmd(inp))
 			{

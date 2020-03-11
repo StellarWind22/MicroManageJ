@@ -9,15 +9,15 @@ import src.me.gannonburks.micromanage.util.MessageHandler;
 
 public class EchoCommand extends Command {
 
-	public EchoCommand(String labelIn, boolean canDisableIn, String descriptionIn)
+	public EchoCommand(String labelIn, boolean canDisableIn, boolean canRunInPrivateIn, String descriptionIn)
 	{
-		super(labelIn, canDisableIn, descriptionIn);
+		super(labelIn, canDisableIn, canRunInPrivateIn, descriptionIn);
 	}
 	
 	@Override
 	public void fireInGuild(String[] args, User sender, TextChannel channel)
 	{
-		String msg = String.join(" ", args).replaceFirst(Main.PREFIX + this.getLabel(), "").trim();
+		String msg = String.join(" ", args).replaceFirst(Main.DEFAULT_PREFIX + this.getLabel(), "").trim();
 		
 		MessageHandler.sendMsgGuild(channel, msg);
 	}
@@ -25,7 +25,7 @@ public class EchoCommand extends Command {
 	@Override
 	public void fireInPrivate(String[] args, User sender, PrivateChannel channel)
 	{
-		String msg = String.join(" ", args).replaceFirst(Main.PREFIX + this.getLabel(), "").trim();
+		String msg = String.join(" ", args).replaceFirst(Main.DEFAULT_PREFIX + this.getLabel(), "").trim();
 		
 		MessageHandler.sendMsgPrivate(channel, msg);
 	}
@@ -33,7 +33,7 @@ public class EchoCommand extends Command {
 	@Override
 	public void fireInConsole(String[] args)
 	{
-		String msg = String.join(" ", args).replaceFirst(Main.PREFIX + this.getLabel(), "").trim();
+		String msg = String.join(" ", args).replaceFirst(Main.DEFAULT_PREFIX + this.getLabel(), "").trim();
 		
 		System.out.println(msg);
 	}
