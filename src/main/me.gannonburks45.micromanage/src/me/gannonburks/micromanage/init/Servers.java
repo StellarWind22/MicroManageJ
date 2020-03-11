@@ -21,9 +21,6 @@ public class Servers {
 	public static void preInit()
 	{
 		//Register Default Commands
-		
-		
-		//Register Default Commands
 		defaultCommandRegistry.register(new HelpCommand("help", false, true, null));
 		defaultCommandRegistry.register(new ServersCommand("servers", false, true, "Lists all servers in the server registry."));
 		defaultCommandRegistry.register(new EchoCommand("echo", true, true, "Repeats message."));
@@ -38,8 +35,7 @@ public class Servers {
 	}
 
 	public static void init()
-	{
-		
+	{	
 		for(Guild guild : Main.bot.getGuilds())
 		{
 			ServerRegistry.register(new Server(guild, Main.DEFAULT_PREFIX, defaultCommandRegistry));
