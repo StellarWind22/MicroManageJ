@@ -8,14 +8,6 @@ import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.CommandHandler;
-import src.me.gannonburks.micromanage.command.CommandRegistry;
-import src.me.gannonburks.micromanage.command.commands.DisableCommand;
-import src.me.gannonburks.micromanage.command.commands.EchoCommand;
-import src.me.gannonburks.micromanage.command.commands.EnableCommand;
-import src.me.gannonburks.micromanage.command.commands.HelpCommand;
-import src.me.gannonburks.micromanage.command.commands.PrivateMessageCommand;
-import src.me.gannonburks.micromanage.command.commands.ServerMessageCommand;
-import src.me.gannonburks.micromanage.command.commands.ShutdownCommand;
 import src.me.gannonburks.micromanage.event.events.OnMessageReceivedEvent;
 import src.me.gannonburks.micromanage.util.Logger;
 
@@ -31,7 +23,7 @@ public class Init {
 			try
 			{	//Try to log in
 				Main.bot = new JDABuilder(AccountType.BOT)
-						.addEventListeners(new OnMessageReceivedEvent())
+						.addEventListeners(new OnMessageReceivedEvent(false))
 						.setToken(args[0]).build();
 			}
 			catch (LoginException e)
@@ -46,20 +38,6 @@ public class Init {
 			Logger.error("Please input a authorization token as the first argument!");
 			Main.shutdown();
 		}
-	}
-	
-	/*
-	 * Register commands
-	 */
-	public static void regCommands()
-	{
-		CommandRegistry.register(new HelpCommand("help", false, null));
-		CommandRegistry.register(new EchoCommand("echo", true, "Repeats message."));
-		CommandRegistry.register(new PrivateMessageCommand("pm", true,"Sends a private message to someone."));	
-		CommandRegistry.register(new ServerMessageCommand("sm", true,"Sends a message to a specific server in a specific channel."));
-		CommandRegistry.register(new EnableCommand("enable", false, "Enables a command."));
-		CommandRegistry.register(new DisableCommand("disable", false, "Disables a command."));
-		CommandRegistry.register(new ShutdownCommand("shutdown", false, "Shuts down the bot."));
 	}
 	
 	/*

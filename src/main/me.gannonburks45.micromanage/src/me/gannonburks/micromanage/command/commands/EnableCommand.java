@@ -5,7 +5,8 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.Command;
-import src.me.gannonburks.micromanage.command.CommandRegistry;
+import src.me.gannonburks.micromanage.server.Server;
+import src.me.gannonburks.micromanage.server.ServerRegistry;
 import src.me.gannonburks.micromanage.util.MessageHandler;
 
 public class EnableCommand extends Command {
@@ -20,13 +21,13 @@ public class EnableCommand extends Command {
 	{
 		String commandlabel = args[1];
 		
-		if(!(CommandRegistry.contains(commandlabel, true)))
+		if(!(ServerRegistry.get(channel.getGuild().getName()).getCommandRegistry().contains(commandlabel, true)))
 		{
 			MessageHandler.sendMsgGuild(channel, "\"" + commandlabel + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
 			return;
 		}
 		
-		Command cmd = CommandRegistry.get(commandlabel, true);
+		Command cmd = ServerRegistry.get(channel.getGuild().getName()).getCommandRegistry().get(commandlabel, true);
 		
 		if(!(cmd.isDisabled()))
 		{	
@@ -44,28 +45,8 @@ public class EnableCommand extends Command {
 	@Override
 	public void fireInPrivate(String[] args, User sender, PrivateChannel channel)
 	{
-		
-		String commandlabel = args[1];
-		
-		if(!(CommandRegistry.contains(commandlabel, true)))
-		{
-			MessageHandler.sendMsgPrivate(channel, "\"" + commandlabel + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
-			return;
-		}
-		
-		Command cmd = CommandRegistry.get(commandlabel, true);
-		
-		if(!(cmd.isDisabled()))
-		{	
-			MessageHandler.sendMsgPrivate(channel, "\"" + commandlabel + "\" is already enabled!");
-			return;
-		}
-		else
-		{
-			cmd.setDisabled(false);
-			MessageHandler.sendMsgPrivate(channel, "\"" + commandlabel + "\" is now enabled!");
-			return;
-		}
+		MessageHandler.sendMsgPrivate(channel, "\"" + this.getLabel() + "\" does not work in a private message channel!");
+		return;
 	}
 	
 	@Override
@@ -74,24 +55,28 @@ public class EnableCommand extends Command {
 		
 		String commandlabel = args[1];
 		
-		if(!(CommandRegistry.contains(commandlabel, true)))
+		if(!(ServerRegistry.get("default").getCommandRegistry().contains(commandlabel, true)))
 		{
 			System.out.println("\"" + commandlabel + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
 			return;
 		}
 		
-		Command cmd = CommandRegistry.get(commandlabel, true);
-		
-		if(!(cmd.isDisabled()))
-		{	
-			System.out.println("\"" + commandlabel + "\" is already enabled!");
-			return;
-		}
-		else
+		for(Server server : ServerRegistry.getAll())
 		{
-			cmd.setDisabled(false);
-			System.out.println("\"" + commandlabel + "\" is now enabled!");
-			return;
+			Command cmd = ServerRegistry.get(server.getName()).getCommandRegistry().get(commandlabel, true);
+			
+			if(!(cmd.isDisabled()))
+			{	
+				System.out.println("\"" + commandlabel + "\" is already enabled in server: \"" + server.getName() + "\"!");
+				continue;
+			}
+			else
+			{
+				cmd.setDisabled(false);
+				System.out.println("\"" + commandlabel + "\" is now enabled in server: \"" + server.getName() + "\"!");
+				continue;
+			}
 		}
+		return;
 	}
 }

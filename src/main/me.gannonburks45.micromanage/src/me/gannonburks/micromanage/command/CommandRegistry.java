@@ -1,15 +1,18 @@
 package src.me.gannonburks.micromanage.command;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
+import javax.annotation.Nonnull;
 
 import src.me.gannonburks.micromanage.util.Logger;
 
 public class CommandRegistry {
 
-	private static ArrayList<Command> registry = new ArrayList<Command>();
+	private ArrayList<Command> registry = new ArrayList<Command>();
 	
 	//Register
-	public static void register(Command cmdIn)
+	public void register(Command cmdIn)
 	{
 		
 		if(contains(cmdIn.getLabel(), true))
@@ -22,17 +25,22 @@ public class CommandRegistry {
 	}
 	
 	//RegisterAll
-	public static void registerAll(Command[] cmdsIn)
+	public void registerAll(@Nonnull Command... cmdsIn)
 	{
-		
-		for(Command cmdLItem : cmdsIn)
+		for(Command cmdIn : cmdsIn)
 		{
-			register(cmdLItem);
+			if(contains(cmdIn.getLabel(), true))
+			{
+				Logger.error("command registry already contains a command with the label \"" + cmdIn.getLabel() + "\".");
+				return;
+			}
 		}
+		
+		Collections.addAll(this.registry, cmdsIn);
 	}
 	
 	//Deregister
-	public static void deRegister(Command cmdIn)
+	public void deRegister(Command cmdIn)
 	{
 		
 		if(!(contains(cmdIn.getLabel(), true)))
@@ -51,7 +59,7 @@ public class CommandRegistry {
 	}
 	
 	//contains
-	public static boolean contains(Command commandIn, boolean showDisabled)
+	public boolean contains(Command commandIn, boolean showDisabled)
 	{
 		if(showDisabled)
 		{
@@ -77,13 +85,13 @@ public class CommandRegistry {
 		}
 	}
 	
-	public static boolean contains(String labelIn, boolean showDisabled)
+	public boolean contains(String labelIn, boolean showDisabled)
 	{
 		return registry.contains(get(labelIn, showDisabled));
 	}
 	
 	//getCommand
-	public static Command get(String labelIn, boolean showDisabled)
+	public Command get(String labelIn, boolean showDisabled)
 	{
 		for(Command cmd : registry)
 		{
@@ -110,7 +118,7 @@ public class CommandRegistry {
 	}
 	
 	//getAll
-	public static ArrayList<Command> getAll(boolean showDisabled)
+	public ArrayList<Command> getAll(boolean showDisabled)
 	{	
 		if(showDisabled) {
 			

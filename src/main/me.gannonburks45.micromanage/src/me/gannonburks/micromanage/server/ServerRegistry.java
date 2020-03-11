@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class ServerRegistry {
 
-	private ArrayList<Server> registry = new ArrayList<Server>();
+	private static ArrayList<Server> registry = new ArrayList<Server>();
 	
 	
 	//Register
-	public void register(Server serverIn)
+	public static void register(Server serverIn)
 	{
 		registry.add(serverIn);
 	}
 	
 	//DeRegister
-	public void deRegister(Server serverIn)
+	public static void deRegister(Server serverIn)
 	{
 		for(Server server : registry)
 		{
@@ -26,12 +26,12 @@ public class ServerRegistry {
 	}
 	
 	//Contains
-	public boolean contains(Server serverIn)
+	public static boolean contains(Server serverIn)
 	{
 		return registry.contains(serverIn);
 	}
 	
-	public boolean contains(String serverIn)
+	public static boolean contains(String serverIn)
 	{
 		for(Server server : registry)
 		{
@@ -44,7 +44,7 @@ public class ServerRegistry {
 	}
 	
 	//Get
-	public Server get(String serverIn)
+	public static Server get(String serverIn)
 	{
 		for(Server server : registry)
 		{
@@ -56,8 +56,8 @@ public class ServerRegistry {
 	}
 	
 	//GetAll
-	public ArrayList<Server> getAll()
+	public static ArrayList<Server> getAll()
 	{
-		return this.registry;
+		return registry;
 	}
 }

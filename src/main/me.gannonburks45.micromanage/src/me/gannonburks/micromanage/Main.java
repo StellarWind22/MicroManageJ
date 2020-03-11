@@ -2,6 +2,7 @@ package src.me.gannonburks.micromanage;
 
 import net.dv8tion.jda.api.JDA;
 import src.me.gannonburks.micromanage.init.Init;
+import src.me.gannonburks.micromanage.init.Servers;
 import src.me.gannonburks.micromanage.util.Logger;
 
 public class Main {
@@ -17,11 +18,15 @@ public class Main {
 	 */
 	public static void main(String[] args)
 	{	
-		//Register Commands
-		Init.regCommands();
+		
+		//Pre Init
+		Servers.preInit();
 		
 		//Login to Discord
 		Init.login(args);
+		
+		//Start up registry
+		Servers.init();
 		
 		//Start Up Console
 		Init.console();

@@ -26,6 +26,12 @@ public class Server implements IServer {
 		this.vocChannels = guildIn.getVoiceChannels();
 	}
 	
+	public Server(String nameIn,CommandRegistry registryIn)
+	{
+		this.name = nameIn;
+		this.registry = registryIn;
+	}
+	
 	//Returns this server's JDA guild object.
 	public Guild getGuild()
 	{

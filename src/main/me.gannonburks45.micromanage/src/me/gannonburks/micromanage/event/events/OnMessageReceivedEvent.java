@@ -2,12 +2,16 @@ package src.me.gannonburks.micromanage.event.events;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.CommandHandler;
+import src.me.gannonburks.micromanage.event.BotEvent;
 import src.me.gannonburks.micromanage.util.Logger;
 
-public class OnMessageReceivedEvent extends ListenerAdapter {
+public class OnMessageReceivedEvent extends BotEvent {
+
+	public OnMessageReceivedEvent(boolean canStopIn) {
+		super(canStopIn);
+	}
 
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
