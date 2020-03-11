@@ -20,28 +20,28 @@ public class CommandHandler {
 			
 			
 			
-			if(!(CommandRegistry.contains(label)))			//If that command doesn't exist send message
+			if(!(CommandRegistry.contains(label, false)))			//If that command doesn't exist send message
 			{
 				MessageHandler.sendMsgGuild(txtChannel, "\"" + label + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
 				return;
 			}
 			
 			//Fire command with args
-			CommandRegistry.get(label).fireInGuild(args, sender, txtChannel);;
+			CommandRegistry.get(label, false).fireInGuild(args, sender, txtChannel);;
 			return;
 			
 		} else if(channel instanceof PrivateChannel) {		//Private Channel Stuff
 			
 			PrivateChannel prvChannel = (PrivateChannel) channel;
 			
-			if(!(CommandRegistry.contains(label))) 			//If that command doesn't exist send message
+			if(!(CommandRegistry.contains(label, false))) 			//If that command doesn't exist send message
 			{
 				MessageHandler.sendMsgPrivate(prvChannel, "\"" + label + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
 				return;
 			}
 			
 			//Fire command with args
-			CommandRegistry.get(label).fireInPrivate(args, sender, prvChannel);
+			CommandRegistry.get(label, false).fireInPrivate(args, sender, prvChannel);
 			return;
 			
 		} else {
@@ -54,13 +54,13 @@ public class CommandHandler {
 	
 	public final static void executeCommand(String label, String[] args) {
 		
-		if(!(CommandRegistry.contains(label)))
+		if(!(CommandRegistry.contains(label, false)))
 		{
 			System.out.println("\"" + label + "\" is not a valid command, try " + Main.PREFIX + "help for a list of commands!");
 			return;
 		}
 		
-		CommandRegistry.get(label).fireInConsole(args);
+		CommandRegistry.get(label, false).fireInConsole(args);
 	}
 	
 	//Check for prefix

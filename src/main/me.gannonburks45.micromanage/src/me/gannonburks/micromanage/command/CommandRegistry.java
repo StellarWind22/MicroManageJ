@@ -12,7 +12,7 @@ public class CommandRegistry {
 	public static void register(Command cmdIn)
 	{
 		
-		if(contains(cmdIn.getLabel()))
+		if(contains(cmdIn.getLabel(), true))
 		{
 			Logger.error("command registry already contains a command with the label \"" + cmdIn.getLabel() + "\".");
 			return;
@@ -35,7 +35,7 @@ public class CommandRegistry {
 	public static void deRegister(Command cmdIn)
 	{
 		
-		if(!(contains(cmdIn.getLabel())))
+		if(!(contains(cmdIn.getLabel(), true)))
 		{
 			Logger.error("command registry does not contain a command with the label \"" + cmdIn.getLabel() + "\".");
 			return;
@@ -51,33 +51,89 @@ public class CommandRegistry {
 	}
 	
 	//contains
-	public static boolean contains(Command command)
+	public static boolean contains(Command commandIn, boolean showDisabled)
 	{
-		return registry.contains(command);
+		if(showDisabled)
+		{
+			return registry.contains(commandIn);
+		}
+		else
+		{
+			if(registry.contains(commandIn))
+			{
+				if(commandIn.isDisabled())
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 	
-	public static boolean contains(String labelIn)
+	public static boolean contains(String labelIn, boolean showDisabled)
 	{
-		return registry.contains(get(labelIn));
+		return registry.contains(get(labelIn, showDisabled));
 	}
 	
 	//getCommand
-	public static Command get(String labelIn)
+	public static Command get(String labelIn, boolean showDisabled)
 	{
 		for(Command cmd : registry)
 		{
-			
 			if(cmd.getLabel().equalsIgnoreCase(labelIn))
 			{
-				return cmd.getCommand();
+				if(showDisabled)
+				{	
+					return cmd.getCommand();
+				}
+				else
+				{
+					if(cmd.isDisabled())
+					{
+						return null;
+					}
+					else
+					{
+						return cmd.getCommand();
+					}
+				}
 			}
 		}
 		return null;
 	}
 	
 	//getAll
-	public static ArrayList<Command> getAll()
+	public static ArrayList<Command> getAll(boolean showDisabled)
 	{	
-		return registry;
+		if(showDisabled) {
+			
+			return registry;
+		}
+		else
+		{
+			ArrayList<Command> registryOut = new ArrayList<Command>();
+			
+			for(Command cmd : registry)
+			{
+				if(cmd.isDisabled())
+				{
+					continue;
+				}
+				else
+				{
+					registryOut.add(cmd);
+				}
+			}
+			
+			return registryOut; 
+		}
+		
 	}
 }

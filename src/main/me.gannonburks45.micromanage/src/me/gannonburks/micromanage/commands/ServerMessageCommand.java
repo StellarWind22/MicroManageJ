@@ -9,8 +9,9 @@ import src.me.gannonburks.micromanage.util.MessageHandler;
 
 public class ServerMessageCommand extends Command {
 
-	public ServerMessageCommand(String labelIn, String descriptionIn) {
-		super(labelIn, descriptionIn);
+	public ServerMessageCommand(String labelIn, boolean canDisableIn, String descriptionIn)
+	{
+		super(labelIn, canDisableIn, descriptionIn);
 	}
 
 	@Override

@@ -14,10 +14,11 @@ public class Command implements ICommand {
 	private boolean disabled = false;
 	private boolean canDisable = true;
 	
-	public Command(String labelIn, String descriptionIn)
+	public Command(String labelIn, boolean canDisableIn, String descriptionIn)
 	{	
-		label = labelIn.toLowerCase();
-		description = descriptionIn;
+		this.label = labelIn.toLowerCase();
+		this.canDisable = canDisableIn;
+		this.description = descriptionIn;
 	}
 	
 	/*
@@ -64,9 +65,5 @@ public class Command implements ICommand {
 
 	public boolean canDisable() {
 		return this.canDisable;
-	}
-
-	public void setCanDisable(boolean canDisableIn) {
-		this.canDisable = canDisableIn;
 	}
 }

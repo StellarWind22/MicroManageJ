@@ -10,6 +10,7 @@ import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.CommandRegistry;
 import src.me.gannonburks.micromanage.commands.DisableCommand;
 import src.me.gannonburks.micromanage.commands.EchoCommand;
+import src.me.gannonburks.micromanage.commands.EnableCommand;
 import src.me.gannonburks.micromanage.commands.HelpCommand;
 import src.me.gannonburks.micromanage.commands.PrivateMessageCommand;
 import src.me.gannonburks.micromanage.commands.ServerMessageCommand;
@@ -50,12 +51,13 @@ public class Init {
 	 */
 	public static void regCommands() {
 		
-		CommandRegistry.register(new HelpCommand("help", null));
-		CommandRegistry.register(new EchoCommand("echo", "Repeats message."));
-		CommandRegistry.register(new PrivateMessageCommand("pm","Sends a private message to someone."));	
-		CommandRegistry.register(new ServerMessageCommand("sm","Sends a message to a specific server in a specific channel."));
-		CommandRegistry.register(new DisableCommand("disable", "Disables a command."));
-		CommandRegistry.register(new ShutdownCommand("shutdown", "Shuts down the bot."));
+		CommandRegistry.register(new HelpCommand("help", false, null));
+		CommandRegistry.register(new EchoCommand("echo", true, "Repeats message."));
+		CommandRegistry.register(new PrivateMessageCommand("pm", true,"Sends a private message to someone."));	
+		CommandRegistry.register(new ServerMessageCommand("sm", true,"Sends a message to a specific server in a specific channel."));
+		CommandRegistry.register(new EnableCommand("enable", false, "Enables a command."));
+		CommandRegistry.register(new DisableCommand("disable", false, "Disables a command."));
+		CommandRegistry.register(new ShutdownCommand("shutdown", false, "Shuts down the bot."));
 	}
 	
 	/*

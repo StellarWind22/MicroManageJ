@@ -10,9 +10,9 @@ import src.me.gannonburks.micromanage.util.MessageHandler;
 
 public class HelpCommand extends Command {
 
-	public HelpCommand(String labelIn, String descriptionIn)
+	public HelpCommand(String labelIn, boolean canDisableIn, String descriptionIn)
 	{
-		super(labelIn, descriptionIn);
+		super(labelIn, canDisableIn, descriptionIn);
 	}
 	
 	@Override
@@ -20,7 +20,7 @@ public class HelpCommand extends Command {
 	{
 		MessageHandler.sendMsgGuild(channel, "List of Commands:");
 		
-		for(Command cmd : CommandRegistry.getAll())
+		for(Command cmd : CommandRegistry.getAll(false))
 		{
 			if(cmd.getLabel() == this.getLabel()) continue;		//Ignore self
 			
@@ -33,7 +33,7 @@ public class HelpCommand extends Command {
 	{
 		MessageHandler.sendMsgPrivate(channel, "List of Commands:");
 		
-		for(Command cmd : CommandRegistry.getAll())
+		for(Command cmd : CommandRegistry.getAll(false))
 		{
 			if(cmd.getLabel() == this.getLabel()) continue;		//Ignore self
 			
@@ -46,7 +46,7 @@ public class HelpCommand extends Command {
 	{
 		System.out.println("List of Commands:");
 		
-		for(Command cmd: CommandRegistry.getAll())
+		for(Command cmd: CommandRegistry.getAll(false))
 		{
 			if(cmd.getLabel() == this.getLabel()) continue;		//Ignore self
 			

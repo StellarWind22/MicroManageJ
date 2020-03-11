@@ -9,9 +9,9 @@ import src.me.gannonburks.micromanage.util.MessageHandler;
 
 public class EchoCommand extends Command {
 
-	public EchoCommand(String labelIn, String descriptionIn)
+	public EchoCommand(String labelIn, boolean canDisableIn, String descriptionIn)
 	{
-		super(labelIn, descriptionIn);
+		super(labelIn, canDisableIn, descriptionIn);
 	}
 	
 	@Override
