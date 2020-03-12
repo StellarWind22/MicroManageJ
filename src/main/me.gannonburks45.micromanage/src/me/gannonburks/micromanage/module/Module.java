@@ -54,4 +54,16 @@ public class Module implements IModule {
 			
 		Collections.addAll(events, botEventsIn);
 	}
+	
+	//Get all commands
+	public ArrayList<Command> getAllCommands()
+	{
+		return this.commands;
+	}
+	
+	//Get all events
+	public ArrayList<BotEvent> getAllEvents()
+	{
+		return this.events;
+	}
 }

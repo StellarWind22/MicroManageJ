@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.Command;
+import src.me.gannonburks.micromanage.module.ModuleRegistry;
 import src.me.gannonburks.micromanage.server.ServerRegistry;
 import src.me.gannonburks.micromanage.util.MessageHandler;
 
@@ -33,7 +34,7 @@ public class HelpCommand extends Command {
 	{
 		MessageHandler.sendMsgPrivate(channel, "List of Commands:");
 		
-		for(Command cmd : ServerRegistry.get("default").getCommandRegistry().getAll(false))
+		for(Command cmd : ModuleRegistry.toCommandRegistry().getAll(false))
 		{
 			if(cmd.getLabel() == this.getLabel()) continue;		//Ignore self
 			
@@ -46,7 +47,7 @@ public class HelpCommand extends Command {
 	{
 		System.out.println("List of Commands:");
 		
-		for(Command cmd : ServerRegistry.get("default").getCommandRegistry().getAll(false))
+		for(Command cmd : ModuleRegistry.toCommandRegistry().getAll(false))
 		{
 			if(cmd.getLabel() == this.getLabel()) continue;		//Ignore self
 			

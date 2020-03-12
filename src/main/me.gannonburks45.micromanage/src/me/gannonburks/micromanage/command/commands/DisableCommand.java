@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.entities.User;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.Command;
 import src.me.gannonburks.micromanage.command.CommandRegistry;
+import src.me.gannonburks.micromanage.module.ModuleRegistry;
 import src.me.gannonburks.micromanage.server.Server;
 import src.me.gannonburks.micromanage.server.ServerRegistry;
 import src.me.gannonburks.micromanage.util.MessageHandler;
@@ -21,7 +22,7 @@ public class DisableCommand extends Command {
 	{
 		String commandlabel = args[1];
 		
-		CommandRegistry cmdReg = ServerRegistry.get(channel.getGuild().getName()).getCommandRegistry();
+		CommandRegistry cmdReg = ModuleRegistry.toCommandRegistry();
 		
 		if(!(cmdReg.contains(commandlabel, true)))
 		{
@@ -58,7 +59,9 @@ public class DisableCommand extends Command {
 	{
 		String commandlabel = args[1];
 		
-		if(!(ServerRegistry.get("default").getCommandRegistry().contains(commandlabel, true)))
+		CommandRegistry cmdReg = ModuleRegistry.toCommandRegistry();
+		
+		if(!(cmdReg.contains(commandlabel, true)))
 		{
 			System.out.println("\"" + commandlabel + "\" is not a valid command, try " + Main.DEFAULT_PREFIX + "help for a list of commands!");
 			return;

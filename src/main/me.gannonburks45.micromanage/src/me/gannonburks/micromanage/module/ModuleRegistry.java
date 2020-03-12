@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 
 import net.dv8tion.jda.internal.utils.Checks;
 import src.me.gannonburks.micromanage.command.Command;
+import src.me.gannonburks.micromanage.command.CommandRegistry;
 import src.me.gannonburks.micromanage.event.BotEvent;
 import src.me.gannonburks.micromanage.util.Logger;
 
@@ -92,5 +93,14 @@ public final class ModuleRegistry {
 		}
 		
 		return events;
+	}
+	
+	public static CommandRegistry toCommandRegistry()
+	{
+		CommandRegistry cmdReg = new CommandRegistry();
+		
+		cmdReg.registerAll(getAllCommands());
+		
+		return cmdReg;
 	}
 }
