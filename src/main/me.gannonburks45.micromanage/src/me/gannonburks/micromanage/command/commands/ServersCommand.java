@@ -22,6 +22,11 @@ public class ServersCommand extends Command {
 		
 		for(Server server : ServerRegistry.getAll())
 		{
+			if(server.getName().equals("default"))
+			{
+				continue;		//Ignore Self
+			}
+			
 			MessageHandler.sendMsgGuild(channel, "   -" + server.getName());
 		}
 		return;
@@ -34,6 +39,11 @@ public class ServersCommand extends Command {
 		
 		for(Server server : ServerRegistry.getAll())
 		{
+			if(server.getName().equals("default"))
+			{
+				continue;		//Ignore Self
+			}
+			
 			MessageHandler.sendMsgPrivate(channel, "   -" + server.getName());
 		}
 		return;
@@ -46,6 +56,11 @@ public class ServersCommand extends Command {
 		
 		for(Server server : ServerRegistry.getAll())
 		{
+			if(server.getName().equals("default"))
+			{
+				continue;		//Ignore Self
+			}
+			
 			System.out.println("   -" + server.getName());
 		}
 		return;

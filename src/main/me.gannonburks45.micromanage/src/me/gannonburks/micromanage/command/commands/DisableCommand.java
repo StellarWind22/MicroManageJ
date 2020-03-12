@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.Command;
+import src.me.gannonburks.micromanage.command.CommandRegistry;
 import src.me.gannonburks.micromanage.server.Server;
 import src.me.gannonburks.micromanage.server.ServerRegistry;
 import src.me.gannonburks.micromanage.util.MessageHandler;
@@ -20,13 +21,15 @@ public class DisableCommand extends Command {
 	{
 		String commandlabel = args[1];
 		
-		if(!(ServerRegistry.get(channel.getGuild().getName()).getCommandRegistry().contains(commandlabel, true)))
+		CommandRegistry cmdReg = ServerRegistry.get(channel.getGuild().getName()).getCommandRegistry();
+		
+		if(!(cmdReg.contains(commandlabel, true)))
 		{
 			MessageHandler.sendMsgGuild(channel, "\"" + commandlabel + "\" is not a valid command, try " + Main.DEFAULT_PREFIX + "help for a list of commands!");
 			return;
 		}
 		
-		Command cmd = ServerRegistry.get(channel.getGuild().getName()).getCommandRegistry().get(commandlabel, true);
+		Command cmd = cmdReg.get(commandlabel, true);
 		
 		if(cmd.canDisable())
 		{

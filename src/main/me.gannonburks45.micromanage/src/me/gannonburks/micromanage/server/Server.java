@@ -69,7 +69,7 @@ public class Server implements IServer {
 
 	//getter for prefix
 	public String getPrefix() {
-		return prefix;
+		return this.prefix;
 	}
 
 	//setter for prefix

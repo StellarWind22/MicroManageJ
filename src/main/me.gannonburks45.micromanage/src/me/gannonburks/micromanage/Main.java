@@ -20,13 +20,10 @@ public class Main {
 	{	
 		
 		//Pre Init
-		Servers.preInit();
+		Servers.init();;
 		
 		//Login to Discord
 		Init.login(args);
-		
-		//Start up registry
-		Servers.init();
 		
 		//Start Up Console
 		Init.console();

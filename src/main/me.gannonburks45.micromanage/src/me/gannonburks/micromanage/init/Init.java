@@ -8,6 +8,8 @@ import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.command.CommandHandler;
+import src.me.gannonburks.micromanage.event.events.OnGuildReady;
+import src.me.gannonburks.micromanage.event.events.OnGuildUpdate;
 import src.me.gannonburks.micromanage.event.events.OnMessageReceivedEvent;
 import src.me.gannonburks.micromanage.util.Logger;
 
@@ -24,6 +26,8 @@ public class Init {
 			{	//Try to log in
 				Main.bot = new JDABuilder(AccountType.BOT)
 						.addEventListeners(new OnMessageReceivedEvent(false))
+						.addEventListeners(new OnGuildUpdate(false))
+						.addEventListeners(new OnGuildReady(false))
 						.setToken(args[0]).build();
 			}
 			catch (LoginException e)

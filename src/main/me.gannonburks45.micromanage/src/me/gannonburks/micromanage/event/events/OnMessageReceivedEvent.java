@@ -9,12 +9,14 @@ import src.me.gannonburks.micromanage.util.Logger;
 
 public class OnMessageReceivedEvent extends BotEvent {
 
-	public OnMessageReceivedEvent(boolean canStopIn) {
+	public OnMessageReceivedEvent(boolean canStopIn)
+	{
 		super(canStopIn);
 	}
 
 	@Override
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+	public void onGuildMessageReceived(GuildMessageReceivedEvent event)
+	{
 		
 		//Ignore own messages
 		if(event.getAuthor() == Main.bot.getSelfUser()) return;
@@ -33,7 +35,8 @@ public class OnMessageReceivedEvent extends BotEvent {
 	}
 	
 	@Override
-	public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
+	public void onPrivateMessageReceived(PrivateMessageReceivedEvent event)
+	{
 		
 		//Ignore own messages
 		if(event.getAuthor() == Main.bot.getSelfUser()) return;
