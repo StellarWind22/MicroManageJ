@@ -48,7 +48,7 @@ public class ServerRegistry {
 	{
 		for(Server server : registry)
 		{
-			if(server.getName().equalsIgnoreCase(serverIn)) {
+			if(server.getName().equals(serverIn)) {
 				return server;
 			}
 		}

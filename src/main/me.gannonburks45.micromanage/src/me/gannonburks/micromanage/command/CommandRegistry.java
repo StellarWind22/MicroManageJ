@@ -11,6 +11,19 @@ public class CommandRegistry {
 
 	private ArrayList<Command> registry = new ArrayList<Command>();
 	
+	//Empty Constructor
+	public CommandRegistry() {}
+	
+	//Clone
+	public CommandRegistry(CommandRegistry registryIn)
+	{
+		for(Command cmd : registryIn.getAll(true))
+		{
+			register(cmd);
+		}
+	}
+	
+	
 	//Register
 	public void register(Command cmdIn)
 	{
