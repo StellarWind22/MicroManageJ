@@ -1,7 +1,11 @@
 package src.me.gannonburks.micromanage.module;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
+import javax.annotation.Nonnull;
+
+import net.dv8tion.jda.internal.utils.Checks;
 import src.me.gannonburks.micromanage.command.Command;
 import src.me.gannonburks.micromanage.event.BotEvent;
 
@@ -29,9 +33,25 @@ public class Module implements IModule {
 		return this.commands;
 	}
 	
-	//Event
+	//Event getter
 	public ArrayList<BotEvent> getEvents()
 	{
 		return this.events;
+	}
+	
+	//Register all commands
+	public void registerAllCommands(@Nonnull Command... commandsIn)
+	{
+		Checks.noneNull(commandsIn, "commandsIn");
+		
+		Collections.addAll(commands, commandsIn);
+	}
+	
+	//Register all commands
+	public void registerAllEvents(@Nonnull BotEvent... botEventsIn)
+	{
+		Checks.noneNull(botEventsIn, "botEventsIn");
+			
+		Collections.addAll(events, botEventsIn);
 	}
 }

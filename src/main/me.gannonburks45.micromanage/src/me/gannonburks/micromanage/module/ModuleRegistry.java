@@ -5,9 +5,12 @@ import java.util.Collections;
 
 import javax.annotation.Nonnull;
 
+import net.dv8tion.jda.internal.utils.Checks;
+import src.me.gannonburks.micromanage.command.Command;
+import src.me.gannonburks.micromanage.event.BotEvent;
 import src.me.gannonburks.micromanage.util.Logger;
 
-public class ModuleRegistry {
+public final class ModuleRegistry {
 
 	private static ArrayList<Module> registry = new ArrayList<Module>();
 	
@@ -18,8 +21,9 @@ public class ModuleRegistry {
 	}
 	
 	//RegisterAll
-	public void registerAll(@Nonnull Module... modulesIn)
+	public static void registerAll(@Nonnull Module... modulesIn)
 	{
+		Checks.noneNull(modulesIn, "modulesIn");
 		
 		for(Module module : modulesIn)
 		{
@@ -34,22 +38,19 @@ public class ModuleRegistry {
 	}
 	
 	
-	//Deregister
-	
-	
 	//Contains
-	public boolean contains(Module moduleIn)
+	public static boolean contains(Module moduleIn)
 	{
 		return registry.contains(moduleIn);
 	}
 	
-	public boolean contains(String moduleIn)
+	public static boolean contains(String moduleIn)
 	{
 		return registry.contains(get(moduleIn));
 	}
 	
 	//Get
-	public Module get(String moduleIn)
+	public static Module get(String moduleIn)
 	{
 		for(Module module : registry)
 		{
@@ -62,8 +63,34 @@ public class ModuleRegistry {
 	}
 	
 	//GetAll
-	public ArrayList<Module> getAll()
+	public static ArrayList<Module> getAll()
 	{
 		return registry;
+	}
+	
+	//Get all registered commands
+	public static ArrayList<Command> getAllCommands()
+	{
+		ArrayList<Command> commands = new ArrayList<Command>();
+		
+		for(Module module : registry)
+		{
+			commands.addAll(module.getCommands());
+		}
+		
+		return commands;
+	}
+	
+	//Get all registered events
+	public static ArrayList<BotEvent> getAllEvents()
+	{
+		ArrayList<BotEvent> events = new ArrayList<BotEvent>();
+		
+		for(Module module : registry)
+		{
+			events.addAll(module.getEvents());
+		}
+		
+		return events;
 	}
 }

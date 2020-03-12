@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import javax.annotation.Nonnull;
 
+import net.dv8tion.jda.internal.utils.Checks;
 import src.me.gannonburks.micromanage.util.Logger;
 
 public class CommandRegistry {
@@ -40,6 +41,8 @@ public class CommandRegistry {
 	//RegisterAll
 	public void registerAll(@Nonnull Command... cmdsIn)
 	{
+		Checks.noneNull(cmdsIn, "cmdsIn");
+		
 		for(Command cmdIn : cmdsIn)
 		{
 			if(contains(cmdIn.getLabel(), true))
@@ -50,6 +53,16 @@ public class CommandRegistry {
 		}
 		
 		Collections.addAll(this.registry, cmdsIn);
+	}
+	
+	public void registerAll(@Nonnull ArrayList<Command> cmdsIn)
+	{
+		Checks.noneNull(cmdsIn, "cmdsIn");
+		
+		for(Command cmdIn : cmdsIn)
+		{
+			register(cmdIn);
+		}
 	}
 	
 	//Deregister

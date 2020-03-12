@@ -2,7 +2,10 @@ package src.me.gannonburks.micromanage.server;
 
 import java.util.ArrayList;
 
-public class ServerRegistry {
+import net.dv8tion.jda.api.entities.Guild;
+import src.me.gannonburks.micromanage.Main;
+
+public final class ServerRegistry {
 
 	private static ArrayList<Server> registry = new ArrayList<Server>();
 	
@@ -45,10 +48,21 @@ public class ServerRegistry {
 	
 	//Get
 	public static Server get(String serverIn)
+	{	
+		for(Guild guild : Main.bot.getGuildsByName(serverIn, true))
+		{
+			return get(guild);
+		}
+		return null;
+	}
+	
+	//Get
+	public static Server get(Guild guildIn)
 	{
 		for(Server server : registry)
 		{
-			if(server.getName().equals(serverIn)) {
+			if(server.getGuild().equals(guildIn))
+			{
 				return server;
 			}
 		}

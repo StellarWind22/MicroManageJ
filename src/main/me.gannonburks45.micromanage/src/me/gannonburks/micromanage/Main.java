@@ -2,7 +2,7 @@ package src.me.gannonburks.micromanage;
 
 import net.dv8tion.jda.api.JDA;
 import src.me.gannonburks.micromanage.init.Init;
-import src.me.gannonburks.micromanage.init.Servers;
+import src.me.gannonburks.micromanage.init.Modules;
 import src.me.gannonburks.micromanage.util.Logger;
 
 public class Main {
@@ -12,7 +12,7 @@ public class Main {
 	
 	//Global Stuff
 	public static final String DEFAULT_PREFIX = "-";
-	
+		
 	/*
 	 * PROGRAM ENTRY POINT
 	 */
@@ -20,7 +20,7 @@ public class Main {
 	{	
 		
 		//Pre Init
-		Servers.init();;
+		Modules.init();
 		
 		//Login to Discord
 		Init.login(args);
