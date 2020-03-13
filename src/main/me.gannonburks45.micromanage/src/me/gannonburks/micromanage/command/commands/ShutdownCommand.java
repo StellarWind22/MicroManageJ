@@ -8,9 +8,9 @@ import src.me.gannonburks.micromanage.command.Command;
 
 public class ShutdownCommand extends Command {
 
-	public ShutdownCommand(String labelIn, boolean canDisableIn, boolean canRunInPrivateIn, String descriptionIn)
+	public ShutdownCommand(String label, String description, boolean canFireInGuild, boolean canFireInPrivate, boolean canFireInConsole, boolean canDisable)
 	{
-		super(labelIn, canDisableIn, canRunInPrivateIn, descriptionIn);
+		super(label, description, canFireInGuild, canFireInPrivate, canFireInConsole, canDisable);
 	}
 
 	@Override

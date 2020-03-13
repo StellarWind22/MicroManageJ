@@ -1,22 +1,10 @@
 package src.me.gannonburks.micromanage.init;
 
-import java.util.Scanner;
-
 import javax.security.auth.login.LoginException;
 
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import src.me.gannonburks.micromanage.Main;
-import src.me.gannonburks.micromanage.command.CommandHandler;
-import src.me.gannonburks.micromanage.command.commands.DisableCommand;
-import src.me.gannonburks.micromanage.command.commands.EchoCommand;
-import src.me.gannonburks.micromanage.command.commands.EnableCommand;
-import src.me.gannonburks.micromanage.command.commands.HelpCommand;
-import src.me.gannonburks.micromanage.command.commands.PrivateMessageCommand;
-import src.me.gannonburks.micromanage.command.commands.ServerMessageCommand;
-import src.me.gannonburks.micromanage.command.commands.ServersCommand;
-import src.me.gannonburks.micromanage.command.commands.ShutdownCommand;
-import src.me.gannonburks.micromanage.command.commands.WhereAmICommand;
 import src.me.gannonburks.micromanage.event.BotEvent;
 import src.me.gannonburks.micromanage.event.events.OnGuildReady;
 import src.me.gannonburks.micromanage.event.events.OnGuildUpdate;
@@ -37,7 +25,7 @@ public class Init {
 		initDefModule();
 		login(args);
 		initListeners();
-		console();
+		//console();
 	}
 	
 	/*
@@ -68,6 +56,7 @@ public class Init {
 	/*
 	 * Console Method
 	 */
+	/*
 	public static void console() {
 		
 		Scanner keyboard = new Scanner(System.in);
@@ -96,6 +85,7 @@ public class Init {
 		keyboard.close();
 		Main.shutdown();
 	}
+	*/
 	
 	/*
 	 * Default module init
@@ -108,6 +98,9 @@ public class Init {
 		//Populate Commands
 		def.registerAllCommands
 		(
+				/*
+				 * REPLACE WITH ACTUAL COMMANDS
+				 * 
 				new HelpCommand("help", false, true, null),
 				new WhereAmICommand("whereami", false, true, "Tells you where you are."),
 				new ServersCommand("servers", false, true, "Lists all servers in the server registry."),
@@ -117,6 +110,7 @@ public class Init {
 				new EnableCommand("enable", false, false, "Enables a command."),
 				new DisableCommand("disable", false, false, "Disables a command."),
 				new ShutdownCommand("shutdown", false, true, "Shuts down the bot.")
+				*/
 		);
 		
 		def.registerAllEvents

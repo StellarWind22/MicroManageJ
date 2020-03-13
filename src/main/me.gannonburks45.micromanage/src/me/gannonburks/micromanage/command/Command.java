@@ -6,19 +6,24 @@ public class Command implements ICommand {
 	private String label;
 	private String description;
 	
-	//Disable-able stuff
-	private boolean disabled = false;
+	//Server Stuff
+	private boolean canFireInGuild = true;
+	private boolean canFireInPrivate = true;
+	private boolean canFireInConsole = true;
+	
+	//Disable Stuff
 	private boolean canDisable = true;
 	
-	//Server Stuff
-	private boolean canRunInPrivate = true;
-	
-	public Command(String labelIn, boolean canDisableIn, boolean canRunInPrivateIn, String descriptionIn)
+	public Command(String label, String description, boolean canFireInGuild, boolean canFireInPrivate, boolean canFireInConsole, boolean canDisable)
 	{	
-		this.label = labelIn.toLowerCase();
-		this.canDisable = canDisableIn;
-		this.canRunInPrivate = canRunInPrivateIn;
-		this.description = descriptionIn;
+		this.label = label.toLowerCase();
+		this.description = description;
+		
+		this.canFireInGuild = canFireInGuild;
+		this.canFireInPrivate = canFireInPrivate;
+		this.canFireInConsole = canFireInConsole;
+		
+		this.canDisable = canDisable;
 	}
 	
 	//Label Getter
@@ -33,26 +38,27 @@ public class Command implements ICommand {
 		return this.description;
 	}
 
-	//Disabled getter
-	public boolean isDisabled()
+	/*
+	 * Command Firing Rules
+	 */
+	public boolean canFireInGuild()
 	{
-		return this.disabled;
+		return this.canFireInGuild;
 	}
-
-	//Disabled setter
-	public void setDisabled(boolean disabledIn)
+	
+	public boolean canFireInPrivate()
 	{
-		this.disabled = disabledIn;
+		return this.canFireInPrivate;
 	}
-
-	//canDisable getter
+	
+	public boolean canFireInConsole()
+	{
+		return this.canFireInConsole;
+	}
+	
+	//canDisable
 	public boolean canDisable()
 	{
 		return this.canDisable;
-	}
-
-	//canRunInPrivate getter
-	public boolean canRunInPrivate() {
-		return this.canRunInPrivate;
 	}
 }

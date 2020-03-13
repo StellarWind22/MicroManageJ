@@ -10,9 +10,9 @@ import src.me.gannonburks.micromanage.util.MessageHandler;
 
 public class ServersCommand extends Command {
 
-	public ServersCommand(String labelIn, boolean canDisableIn, boolean canRunInPrivateIn, String descriptionIn)
+	public ServersCommand(String label, String description, boolean canFireInGuild, boolean canFireInPrivate, boolean canFireInConsole, boolean canDisable)
 	{
-		super(labelIn, canDisableIn, canRunInPrivateIn, descriptionIn);
+		super(label, description, canFireInGuild, canFireInPrivate, canFireInConsole, canDisable);
 	}
 
 	@Override

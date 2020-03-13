@@ -3,7 +3,6 @@ package src.me.gannonburks.micromanage.event.events;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import src.me.gannonburks.micromanage.Main;
-import src.me.gannonburks.micromanage.command.CommandHandler;
 import src.me.gannonburks.micromanage.event.BotEvent;
 import src.me.gannonburks.micromanage.util.Logger;
 
@@ -25,13 +24,15 @@ public class OnMessageReceivedEvent extends BotEvent {
 		Logger.info("Got Message: \"" + event.getMessage().getContentRaw() + "\" from server: \"" + event.getGuild().getName() + "\" in channel: \"" + event.getChannel().getName() + "\" from: \"" + event.getAuthor().getName() + "\".");
 		
 		//Format Input
-		String[] args = event.getMessage().getContentRaw().split(" ");
+		//String[] args = event.getMessage().getContentRaw().split(" ");
 		
 		//If any message starts with the prefix attempt to execute
+		/*
 		if(CommandHandler.isCmd(args[0]))
 		{	
 			CommandHandler.executeCommand(args[0].replaceFirst(Main.DEFAULT_PREFIX, ""), args, event.getAuthor(), event.getChannel());
 		}
+		*/
 	}
 	
 	@Override
@@ -46,12 +47,14 @@ public class OnMessageReceivedEvent extends BotEvent {
 		
 		
 		//Format Input
-		String[] args = event.getMessage().getContentRaw().split(" ");
+		//String[] args = event.getMessage().getContentRaw().split(" ");
 		
 		//If any message starts with the prefix attempt to execute
+		/*
 		if(CommandHandler.isCmd(args[0]))
 		{	
 			CommandHandler.executeCommand(args[0].replaceFirst(Main.DEFAULT_PREFIX, ""), args, event.getAuthor(), event.getChannel());
 		}
+		*/
 	}
 }

@@ -45,14 +45,4 @@ public interface ICommand {
 	{
 		return;
 	}
-	
-	/*
-	 * Method that returns an instance of a command object.
-	 * 
-	 * @return Instance of Command.
-	 */
-	default Command getCommand()
-	{	
-		return (Command)this;
-	}
 }
