@@ -27,7 +27,7 @@ public final class ModuleRegistry {
 		
 		for(Module module : modulesIn)
 		{
-			if(contains(module.getName()))
+			if(containsModule(module.getName()))
 			{
 				Logger.error("module registry already contains a module with the name \"" + module.getName() + "\".");
 				return;
@@ -39,18 +39,18 @@ public final class ModuleRegistry {
 	
 	
 	//Contains
-	public static boolean contains(Module moduleIn)
+	public static boolean containsModule(Module moduleIn)
 	{
 		return registry.contains(moduleIn);
 	}
 	
-	public static boolean contains(String moduleIn)
+	public static boolean containsModule(String moduleIn)
 	{
-		return registry.contains(get(moduleIn));
+		return registry.contains(getModule(moduleIn));
 	}
 	
 	//Get
-	public static Module get(String moduleIn)
+	public static Module getModule(String moduleIn)
 	{
 		for(Module module : registry)
 		{
@@ -63,9 +63,88 @@ public final class ModuleRegistry {
 	}
 	
 	//GetAll
-	public static ArrayList<Module> getAll()
+	public static ArrayList<Module> getAllModules()
 	{
 		return registry;
+	}
+	
+	
+	
+	//Contains specific command
+	public static boolean containsCommand(String commandName)
+	{
+		return (getCommand(commandName) != null);
+	}
+	
+	//Contains specific command that works in guilds.
+	public static boolean containsGuildCommand(String commandName)
+	{
+		return (getGuildCommand(commandName) != null);
+	}
+	
+	//Contains specific command that works in private
+	public static boolean containsPrivateCommand(String commandName)
+	{
+		return (getPrivateCommand(commandName) != null);
+	}
+	
+	//Contains a specific command that works in the console
+	public static boolean containsConsoleCommand(String commandName)
+	{
+		return (getConsoleCommand(commandName) != null);
+	}
+	
+	
+	//Get specific command
+	public static Command getCommand(String commandName)
+	{
+		for(Command command : getAllCommands())
+		{
+			if(command.getLabel().equalsIgnoreCase(commandName))
+			{
+				return command;
+			}
+		}
+		return null;
+	}
+	
+	//Get a specific command that works in guilds
+	public static Command getGuildCommand(String commandName)
+	{
+		for(Command command : getAllGuildCommands())
+		{
+			if(command.getLabel().equalsIgnoreCase(commandName))
+			{
+				return command;
+			}
+		}
+		return null;
+	}
+	
+	//Get a specific command that works in private
+	public static Command getPrivateCommand(String commandName)
+	{
+		for(Command command : getAllPrivateCommands())
+		{
+			if(command.getLabel().equalsIgnoreCase(commandName))
+			{
+				return command;
+			}
+		}
+		return null;
+	}
+	
+	//get a specific command that works in the console
+	public static Command getConsoleCommand(String commandName)
+	{
+		for(Command command : getAllConsoleCommands())
+		{
+			if(command.getLabel().equalsIgnoreCase(commandName))
+			{
+				return command;
+			}
+		}
+		return null;
 	}
 	
 	//Get all registered commands
@@ -78,6 +157,54 @@ public final class ModuleRegistry {
 			commands.addAll(module.getCommands());
 		}
 		
+		return commands;
+	}
+	
+	//Get all registered commands that work in guilds
+	public static ArrayList<Command> getAllGuildCommands()
+	{
+		ArrayList<Command> commands = new ArrayList<Command>();
+			
+		for(Command command : getAllCommands())
+		{
+			if(command.canFireInGuild())
+			{
+				commands.add(command);
+			}
+		}
+			
+		return commands;
+	}
+	
+	//Get all registered commands that work in pms
+	public static ArrayList<Command> getAllPrivateCommands()
+	{
+		ArrayList<Command> commands = new ArrayList<Command>();
+				
+		for(Command command : getAllCommands())
+		{
+			if(command.canFireInPrivate())
+			{
+				commands.add(command);
+			}
+		}
+				
+		return commands;
+	}
+	
+	//Get all registered commands that work in the console
+	public static ArrayList<Command> getAllConsoleCommands()
+	{
+		ArrayList<Command> commands = new ArrayList<Command>();
+				
+		for(Command command : getAllCommands())
+		{
+			if(command.canFireInConsole())
+			{
+				commands.add(command);
+			}
+		}
+				
 		return commands;
 	}
 	

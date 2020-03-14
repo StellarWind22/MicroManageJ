@@ -1,10 +1,13 @@
 package src.me.gannonburks.micromanage.init;
 
+import java.util.Scanner;
+
 import javax.security.auth.login.LoginException;
 
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import src.me.gannonburks.micromanage.Main;
+import src.me.gannonburks.micromanage.command.CommandHandler;
 import src.me.gannonburks.micromanage.event.BotEvent;
 import src.me.gannonburks.micromanage.event.events.OnGuildReady;
 import src.me.gannonburks.micromanage.event.events.OnGuildUpdate;
@@ -25,7 +28,7 @@ public class Init {
 		initDefModule();
 		login(args);
 		initListeners();
-		//console();
+		console();
 	}
 	
 	/*
@@ -56,36 +59,36 @@ public class Init {
 	/*
 	 * Console Method
 	 */
-	/*
+	
 	public static void console() {
 		
+		@SuppressWarnings("resource")
 		Scanner keyboard = new Scanner(System.in);
-		String inp = "";
+		String inp = null;
 		
-		while(!(inp.startsWith(Main.DEFAULT_PREFIX + "shutdown")))
+		while(true)
 		{
-		
 			inp = keyboard.nextLine();
 			
-			//Split input into args
-			String[] consoleArgs = inp.split(" ");
-			String label = consoleArgs[0].replaceFirst(Main.DEFAULT_PREFIX, "");
-			
-			if(CommandHandler.isCmd(inp))
+			if(CommandHandler.isCmd(inp, null))
 			{
-				CommandHandler.executeCommand(label, consoleArgs);
+				String label = CommandHandler.getLabel(inp, null);
+				
+				if(ModuleRegistry.containsConsoleCommand(label))
+				{
+					CommandHandler.execute(label, CommandHandler.getArgs(inp, null));
+				}
+				else
+				{
+					System.out.println("\"" + label + "\" is not a valid command, try " + Main.DEFAULT_PREFIX + "help for a list of valid commands!");
+				}
 			}
 			else
 			{
-				System.out.println("\"" + label + "\" is not a valid command!");
+				System.out.println("\"" + inp + "\" is not a command, commands start with \"" + Main.DEFAULT_PREFIX + "\"!");
 			}
 		}
-		
-		//Exit Program
-		keyboard.close();
-		Main.shutdown();
 	}
-	*/
 	
 	/*
 	 * Default module init

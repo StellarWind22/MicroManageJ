@@ -22,6 +22,8 @@ public class Server {
 		this.name = guildIn.getName();
 		this.txtChannels = guildIn.getTextChannels();
 		this.vocChannels = guildIn.getVoiceChannels();
+		
+		//Create settings
 	}
 	
 	//Returns this server's JDA guild object.
