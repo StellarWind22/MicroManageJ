@@ -28,16 +28,28 @@ public final class SettingsReader {
 	//get values
 	public static Timestamp getJoinDate(Server server)
 	{
-		return Timestamp.valueOf(parseSettingsFile(server).get("joined").toString());
+		return Timestamp.valueOf(safeParseSettingsFile(server).get("joined").toString());
 	}
 	
 	public static String getPrefix(Server server)
 	{
-		return parseSettingsFile(server).get("prefix").toString();
+		return safeParseSettingsFile(server).get("prefix").toString();
 	}
 	
 	public static boolean isDisabedIn(Server server, Command command)
 	{
+		JSONObject[] commands = (JSONObject[]) ((JSONArray)safeParseSettingsFile(server).get("commands")).toArray();
+		String label = command.getLabel();
+		
+		for(JSONObject commandContainer : commands)
+		{
+			JSONObject commandJson = (JSONObject) commandContainer.get("command");
+			
+			if(commandJson.get("label").toString() == label)
+			{
+				return Boolean.parseBoolean(commandJson.get("disabled").toString());
+			}
+		}
 		return false;
 	}
 	
@@ -132,7 +144,7 @@ public final class SettingsReader {
 	}
 	
 	//Parse file into JSONObject
-	public static JSONObject parseSettingsFile(Server server)
+	public static JSONObject parseSettingsFile(Server server) throws ParseException
 	{
 		try {
 			//Read In File
@@ -140,10 +152,34 @@ public final class SettingsReader {
 			
 			return (JSONObject) settingsFile;
 		}
-		catch (ParseException | IOException e)
+		catch (IOException e)
 		{
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	//Parse file into JSONObject with extra parseerror handling stuff
+	public static JSONObject safeParseSettingsFile(Server server)
+	{
+		try
+		{
+			return parseSettingsFile(server);
+		}
+		catch (ParseException e)
+		{
+			generateSettings(server, Paths.get(SETTINGS_FOLDER + server.getName() + ".json"));
+			
+			try
+			{
+				return parseSettingsFile(server);
+			}
+			catch
+			(ParseException e1)
+			{
+				e1.printStackTrace();
+				return null;
+			}
 		}
 	}
 }
