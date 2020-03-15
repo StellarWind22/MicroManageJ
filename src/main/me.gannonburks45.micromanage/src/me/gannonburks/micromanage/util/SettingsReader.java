@@ -25,7 +25,7 @@ public final class SettingsReader {
 	
 	private final static String SETTINGS_FOLDER = "/settings/";
 	
-	//get values
+	//get join date
 	public static Timestamp getJoinDate(Server server)
 	{
 		return Timestamp.valueOf(safeParseSettingsFile(server).get("joined").toString());
@@ -55,6 +55,7 @@ public final class SettingsReader {
 		return false;
 	}
 	
+	//return timestamp of last change to command
 	public static Timestamp getLastChanged(Server server, Command command)
 	{
 		JSONObject[] commands = (JSONObject[]) ((JSONArray)safeParseSettingsFile(server).get("commands")).toArray();
@@ -72,6 +73,7 @@ public final class SettingsReader {
 		return null;
 	}
 	
+	//get the user that changed that command
 	public static User getLastChangedBy(Server server, Command command)
 	{
 		JSONObject[] commands = (JSONObject[]) ((JSONArray)safeParseSettingsFile(server).get("commands")).toArray();
@@ -89,8 +91,39 @@ public final class SettingsReader {
 		return null;
 	}
 	
-	//set value
+	//set values
+	@SuppressWarnings("unchecked")
+	public static boolean setPrefix(Server server, String newPrefix)
+	{
+		JSONObject settingsFile = (JSONObject)safeParseSettingsFile(server);
+		
+		settingsFile.replace("prefix", newPrefix);
+		
+		return overwriteSettingsFile(settingsFile, server);
+	}
 	
+	@SuppressWarnings("unchecked")
+	public static boolean setDisabledIn(Server server, Command command, User sender, boolean isDisabled)
+	{
+		JSONObject settingsFile = (JSONObject)safeParseSettingsFile(server);
+		JSONObject[] commands = (JSONObject[]) ((JSONArray)settingsFile.get("commands")).toArray();
+		String label = command.getLabel();
+		
+		for(JSONObject commandContainer : commands)
+		{
+			JSONObject commandJson = (JSONObject) commandContainer.get("command");
+			
+			if(commandJson.get("label").toString() == label && commandJson.get("disabled").toString() != null)
+			{
+				commandJson.replace("disabled", isDisabled);
+				commandJson.replace("last_changed", new Timestamp(System.currentTimeMillis()));
+				commandJson.replace("changed_by", sender.getId());
+				
+				return overwriteSettingsFile(settingsFile, server);
+			}
+		}
+		return false;
+	}
 	
 	//ensureFile
 	public static File ensureFile(Server server, Path path)
@@ -206,6 +239,23 @@ public final class SettingsReader {
 				e1.printStackTrace();
 				return null;
 			}
+		}
+	}
+	
+	public static boolean overwriteSettingsFile(JSONObject parsedFile, Server server)
+	{
+		Path path = Paths.get(SETTINGS_FOLDER + server.getName() + ".json");
+		
+		try (FileWriter file = new FileWriter(path.toString()))
+		{
+			file.write(parsedFile.toJSONString());
+			file.flush();
+			return true;
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return false;
 		}
 	}
 }
