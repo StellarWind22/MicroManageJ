@@ -31,11 +31,13 @@ public final class SettingsReader {
 		return Timestamp.valueOf(safeParseSettingsFile(server).get("joined").toString());
 	}
 	
+	//get prefix for server
 	public static String getPrefix(Server server)
 	{
 		return safeParseSettingsFile(server).get("prefix").toString();
 	}
 	
+	//return if command is disabled
 	public static boolean isDisabedIn(Server server, Command command)
 	{
 		JSONObject[] commands = (JSONObject[]) ((JSONArray)safeParseSettingsFile(server).get("commands")).toArray();
@@ -55,11 +57,35 @@ public final class SettingsReader {
 	
 	public static Timestamp getLastChanged(Server server, Command command)
 	{
+		JSONObject[] commands = (JSONObject[]) ((JSONArray)safeParseSettingsFile(server).get("commands")).toArray();
+		String label = command.getLabel();
+		
+		for(JSONObject commandContainer : commands)
+		{
+			JSONObject commandJson = (JSONObject) commandContainer.get("command");
+			
+			if(commandJson.get("label").toString() == label)
+			{
+				return Timestamp.valueOf(commandJson.get("last_changed").toString());
+			}
+		}
 		return null;
 	}
 	
 	public static User getLastChangedBy(Server server, Command command)
 	{
+		JSONObject[] commands = (JSONObject[]) ((JSONArray)safeParseSettingsFile(server).get("commands")).toArray();
+		String label = command.getLabel();
+		
+		for(JSONObject commandContainer : commands)
+		{
+			JSONObject commandJson = (JSONObject) commandContainer.get("command");
+			
+			if(commandJson.get("label").toString() == label)
+			{
+				return Main.bot.getUserById(commandJson.get("changed_by").toString());
+			}
+		}
 		return null;
 	}
 	
