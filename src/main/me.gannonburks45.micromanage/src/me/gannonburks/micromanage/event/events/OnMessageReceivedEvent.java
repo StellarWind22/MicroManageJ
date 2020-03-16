@@ -3,6 +3,7 @@ package src.me.gannonburks.micromanage.event.events;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import src.me.gannonburks.micromanage.Main;
+import src.me.gannonburks.micromanage.command.Command;
 import src.me.gannonburks.micromanage.command.CommandHandler;
 import src.me.gannonburks.micromanage.event.BotEvent;
 import src.me.gannonburks.micromanage.module.ModuleRegistry;
@@ -42,12 +43,22 @@ public class OnMessageReceivedEvent extends BotEvent {
 			
 			if(ModuleRegistry.containsGuildCommand(label) && !(SettingsReader.isDisabedIn(server, ModuleRegistry.getGuildCommand(label))))
 			{
-				CommandHandler.execute(label, args, event.getAuthor(), event.getChannel());
-				return;
+				Command command = ModuleRegistry.getGuildCommand(label);
+				
+				if(SettingsReader.isDisabedIn(server, command))
+				{
+					CommandHandler.execute(label, args, event.getAuthor(), event.getChannel());
+					return;
+				}
+				else
+				{
+					MessageHandler.sendMsgGuild(event.getChannel(), event.getAuthor().getAsMention() + " \"" + label + "\" is not a valid command, try \"" + prefix + "help\" for a list of commands.");
+					return;
+				}
 			}
 			else
 			{
-				MessageHandler.sendMsgGuild(event.getChannel(), "\"" + label + " is not a valid command, try \"" + prefix + "help\" for a list of commands");
+				MessageHandler.sendMsgGuild(event.getChannel(), event.getAuthor().getAsMention() + " \"" + label + "\" is not a valid command, try \"" + prefix + "help\" for a list of commands.");
 				return;
 			}
 		}
@@ -71,14 +82,14 @@ public class OnMessageReceivedEvent extends BotEvent {
 			String label = CommandHandler.getLabel(rawMessage, null);
 			String[] args = CommandHandler.getArgs(rawMessage, null);
 			
-			if(ModuleRegistry.containsGuildCommand(label) && !(SettingsReader.isDisabedIn(null, ModuleRegistry.getGuildCommand(label))))
+			if(ModuleRegistry.containsPrivateCommand(label) && !(SettingsReader.isDisabedIn(null, ModuleRegistry.getPrivateCommand(label))))
 			{
 				CommandHandler.execute(label, args, event.getAuthor(), event.getChannel());
 				return;
 			}
 			else
 			{
-				MessageHandler.sendMsgPrivate(event.getChannel(), "\"" + label + " is not a valid command, try \"" + Main.DEFAULT_PREFIX + "help\" for a list of commands");
+				MessageHandler.sendMsgPrivate(event.getChannel(), event.getAuthor().getAsMention() + " \"" + label + " is not a valid command, try \"" + Main.DEFAULT_PREFIX + "help\" for a list of commands");
 				return;
 			}
 		}

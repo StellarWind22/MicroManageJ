@@ -105,6 +105,11 @@ public final class SettingsReader {
 	@SuppressWarnings("unchecked")
 	public static boolean setDisabledIn(Server server, Command command, User sender, boolean isDisabled)
 	{
+		if(!(command.canDisable()))
+		{
+			return false;
+		}
+		
 		JSONObject settingsFile = (JSONObject)safeParseSettingsFile(server);
 		JSONObject[] commands = (JSONObject[]) ((JSONArray)settingsFile.get("commands")).toArray();
 		String label = command.getLabel();
