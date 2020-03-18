@@ -3,11 +3,11 @@ package src.me.gannonburks.micromanage.event.events;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import src.me.gannonburks.micromanage.Main;
-import src.me.gannonburks.micromanage.command.Command;
-import src.me.gannonburks.micromanage.command.CommandHandler;
+import src.me.gannonburks.micromanage.command.BotCommand;
+import src.me.gannonburks.micromanage.command.BotCommandHandler;
 import src.me.gannonburks.micromanage.event.BotEvent;
 import src.me.gannonburks.micromanage.module.ModuleRegistry;
-import src.me.gannonburks.micromanage.server.Server;
+import src.me.gannonburks.micromanage.server.DiscordServer;
 import src.me.gannonburks.micromanage.server.ServerRegistry;
 import src.me.gannonburks.micromanage.util.Logger;
 import src.me.gannonburks.micromanage.util.MessageHandler;
@@ -29,25 +29,25 @@ public class OnMessageReceivedEvent extends BotEvent {
 		
 		//Grab some vars
 		String rawMessage = event.getMessage().getContentRaw();
-		Server server = ServerRegistry.get(event.getGuild());
+		DiscordServer server = ServerRegistry.get(event.getGuild());
 		
 		//Got Message
 		Logger.info("Got Message: \"" + rawMessage + "\" from server: \"" + event.getGuild().getName() + "\" in channel: \"" + event.getChannel().getName() + "\" from: \"" + event.getAuthor().getName() + "\".");
 		
 		
-		if(CommandHandler.isCmd(rawMessage, server))
+		if(BotCommandHandler.isCmd(rawMessage, server))
 		{
-			String label = CommandHandler.getLabel(rawMessage, server);
-			String[] args = CommandHandler.getArgs(rawMessage, server);
+			String label = BotCommandHandler.getLabel(rawMessage, server);
+			String[] args = BotCommandHandler.getArgs(rawMessage, server);
 			String prefix = SettingsReader.getPrefix(server);
 			
 			if(ModuleRegistry.containsGuildCommand(label) && !(SettingsReader.isDisabedIn(server, ModuleRegistry.getGuildCommand(label))))
 			{
-				Command command = ModuleRegistry.getGuildCommand(label);
+				BotCommand command = ModuleRegistry.getGuildCommand(label);
 				
 				if(SettingsReader.isDisabedIn(server, command))
 				{
-					CommandHandler.execute(label, args, event.getAuthor(), event.getChannel());
+					BotCommandHandler.execute(label, args, event.getAuthor(), event.getChannel());
 					return;
 				}
 				else
@@ -77,14 +77,14 @@ public class OnMessageReceivedEvent extends BotEvent {
 		Logger.info("Got Message: \"" + rawMessage + "\" from: \"" + event.getAuthor().getName());
 		
 		
-		if(CommandHandler.isCmd(rawMessage, null))
+		if(BotCommandHandler.isCmd(rawMessage, null))
 		{
-			String label = CommandHandler.getLabel(rawMessage, null);
-			String[] args = CommandHandler.getArgs(rawMessage, null);
+			String label = BotCommandHandler.getLabel(rawMessage, null);
+			String[] args = BotCommandHandler.getArgs(rawMessage, null);
 			
-			if(ModuleRegistry.containsPrivateCommand(label) && !(SettingsReader.isDisabedIn(null, ModuleRegistry.getPrivateCommand(label))))
+			if(ModuleRegistry.containsPrivateCommand(label))
 			{
-				CommandHandler.execute(label, args, event.getAuthor(), event.getChannel());
+				BotCommandHandler.execute(label, args, event.getAuthor(), event.getChannel());
 				return;
 			}
 			else

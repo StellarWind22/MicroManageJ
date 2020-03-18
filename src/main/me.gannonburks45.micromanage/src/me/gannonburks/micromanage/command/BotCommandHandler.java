@@ -5,10 +5,10 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.module.ModuleRegistry;
-import src.me.gannonburks.micromanage.server.Server;
+import src.me.gannonburks.micromanage.server.DiscordServer;
 import src.me.gannonburks.micromanage.util.SettingsReader;
 
-public final class CommandHandler {
+public final class BotCommandHandler {
 
 	/*
 	 * Execute from a guild channel method
@@ -51,7 +51,7 @@ public final class CommandHandler {
 	 * @param rawCommand	Raw command string.
 	 * @param server		Server to get prefix from, passing null will use default prefix.
 	 */
-	public static String getLabel(String rawCommand, Server server)
+	public static String getLabel(String rawCommand, DiscordServer server)
 	{
 		if(server != null)
 		{
@@ -69,7 +69,7 @@ public final class CommandHandler {
 	 * @param rawCommand	Raw command string.
 	 * @param server		Server to get prefix from, passing null will use default prefix.
 	 */
-	public static String[] getArgs(String rawCommand, Server server)
+	public static String[] getArgs(String rawCommand, DiscordServer server)
 	{
 		if(server != null)
 		{
@@ -87,7 +87,7 @@ public final class CommandHandler {
 	 * @param rawCmd Raw command string.
 	 * @param server Server to check in, passing null will check for console.
 	 */
-	public static boolean isCmd(String rawCommand, Server server)
+	public static boolean isCmd(String rawCommand, DiscordServer server)
 	{
 		if(server != null)
 		{

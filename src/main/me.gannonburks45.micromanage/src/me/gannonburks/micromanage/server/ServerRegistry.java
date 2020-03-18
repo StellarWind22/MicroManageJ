@@ -4,41 +4,61 @@ import java.util.ArrayList;
 
 import net.dv8tion.jda.api.entities.Guild;
 import src.me.gannonburks.micromanage.Main;
+import src.me.gannonburks.micromanage.util.Logger;
 
-public final class ServerRegistry {
-
-	private static ArrayList<Server> registry = new ArrayList<Server>();
+public final class ServerRegistry
+{
+	private static ArrayList<DiscordServer> servers = new ArrayList<DiscordServer>();
 	
-	
-	//Register
-	public static void register(Server serverIn)
+	/**
+	 * Registration method for the ServerRegistry.
+	 * 
+	 * @param server Server object to be added.
+	 */
+	public static void register(DiscordServer server)
 	{
-		registry.add(serverIn);
+		if(servers.contains(server))
+		{
+			Logger.error("ServerRegistry already contains an instance of \"" + server.getName() + "\"!");
+			return;
+		}
+		servers.add(server);
 	}
 	
-	//DeRegister
-	public static void deRegister(Server serverIn)
+	/**
+	 * De-registration method for the ServerRegistry.
+	 * 
+	 * @param server Server object to be removed.
+	 */
+	public static void deRegister(DiscordServer server)
 	{
-		for(Server server : registry)
+		for(DiscordServer entry : servers)
 		{
-			if(server.equals(serverIn))
+			if(entry.equals(server))
 			{
-				registry.remove(serverIn);
+				servers.remove(entry);
 			}
 		}
 	}
 	
-	//Contains
-	public static boolean contains(Server serverIn)
+	/**
+	 * Method for checking whether or not the registry
+	 * contains that server.
+	 * 
+	 * @param server	Server to check the registry for.
+	 * 
+	 * @return If the registry contains the server.
+	 */
+	public static boolean contains(DiscordServer server)
 	{
-		return registry.contains(serverIn);
+		return servers.contains(server);
 	}
 	
-	public static boolean contains(String serverIn)
+	public static boolean contains(String server)
 	{
-		for(Server server : registry)
+		for(DiscordServer entry : servers)
 		{
-			if(server.getName().equalsIgnoreCase(serverIn))
+			if(entry.getName().equalsIgnoreCase(server))
 			{
 				return true;
 			}
@@ -46,22 +66,36 @@ public final class ServerRegistry {
 		return false;
 	}
 	
-	//Get
-	public static Server get(String serverIn)
+	/**
+	 * Method for getting a specific server from the
+	 * registry via the name.
+	 * 
+	 * @param server Name of server to retrieve.
+	 * 
+	 * @return Instance of the server if it can find it.
+	 */
+	public static DiscordServer get(String server)
 	{	
-		for(Guild guild : Main.bot.getGuildsByName(serverIn, true))
+		for(Guild guild : Main.bot.getGuildsByName(server, true))
 		{
 			return get(guild);
 		}
 		return null;
 	}
 	
-	//Get
-	public static Server get(Guild guildIn)
+	/**
+	 * Method for getting a specific server from the
+	 * registry via a JDA Guild object.
+	 * 
+	 * @param guild Guild object to retrieve server for.
+	 * 
+	 * @return Instance of the server if it can find it.
+	 */
+	public static DiscordServer get(Guild guild)
 	{
-		for(Server server : registry)
+		for(DiscordServer server : servers)
 		{
-			if(server.getGuild().equals(guildIn))
+			if(server.getGuild().equals(guild))
 			{
 				return server;
 			}
@@ -69,9 +103,14 @@ public final class ServerRegistry {
 		return null;
 	}
 	
-	//GetAll
-	public static ArrayList<Server> getAll()
+	/**
+	 * Method for getting all servers that are
+	 * currently registered in the registry.
+	 * 
+	 * @return Mutable array of all server objects.
+	 */
+	public static ArrayList<DiscordServer> getAll()
 	{
-		return registry;
+		return servers;
 	}
 }

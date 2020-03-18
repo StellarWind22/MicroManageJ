@@ -2,14 +2,14 @@ package src.me.gannonburks.micromanage.command.commands;
 
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
-import src.me.gannonburks.micromanage.command.Command;
+import src.me.gannonburks.micromanage.command.BotCommand;
 import src.me.gannonburks.micromanage.module.ModuleRegistry;
-import src.me.gannonburks.micromanage.server.Server;
+import src.me.gannonburks.micromanage.server.DiscordServer;
 import src.me.gannonburks.micromanage.server.ServerRegistry;
 import src.me.gannonburks.micromanage.util.MessageHandler;
 import src.me.gannonburks.micromanage.util.SettingsReader;
 
-public class SetDisabledCommand extends Command {
+public class SetDisabledCommand extends BotCommand {
 
 	public SetDisabledCommand(String label, String description, boolean canFireInGuild, boolean canFireInPrivate, boolean canFireInConsole, boolean canDisable)
 	{
@@ -19,7 +19,7 @@ public class SetDisabledCommand extends Command {
 	@Override
 	public void fireInGuild(String[] args, User sender, TextChannel channel)
 	{
-		Server server = ServerRegistry.get(channel.getGuild());
+		DiscordServer server = ServerRegistry.get(channel.getGuild());
 		
 		if(args.length > 0)
 		{

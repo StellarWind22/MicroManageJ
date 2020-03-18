@@ -6,10 +6,8 @@ import src.me.gannonburks.micromanage.util.Logger;
 
 public class Main {
 
-	//Instantiate stuff
+	//Program Wide Constants
 	public static JDA bot;
-	
-	//Global Stuff
 	public static final String DEFAULT_PREFIX = "-";
 		
 	/*
@@ -20,6 +18,9 @@ public class Main {
 		Init.init(args);
 	}
 	
+	/**
+	 * Method for shutting down the bot.
+	 */
 	public static void shutdown()
 	{	
 		Logger.info("Bot shutting down!");

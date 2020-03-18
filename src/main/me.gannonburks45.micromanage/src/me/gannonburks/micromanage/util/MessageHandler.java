@@ -6,19 +6,20 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import src.me.gannonburks.micromanage.Main;
 
-public class MessageHandler {
-	
-	//Global Stuff
+public class MessageHandler
+{
 	public static final int CHAR_LIMIT = 2000;
 	
-	
-	/*
-	 * Broadcast message to multiple servers in channels with the same name
+	/**
+	 * Method for broadcasting a message
+	 * to all servers in a channel with the
+	 * same name.
 	 * 
-	 * @param String channelIn		name of channels to send message to.
-	 * @param String msgIn			message to be sent.
+	 * @param channelIn		Name of channel to send message to.
+	 * @param msgIn			Message to be sent to the channel.
 	 * 
-	 * @param int channelLimit		number of channels with matching names in each server to send the message to.	0 = unlimited
+	 * @param channelLimit	Number of channels with matching names
+	 * 						to send message to(0 == unlimited).
 	 */
 	public static void sendMsgBroadcast(String channelIn, String msgIn, int channelLimit)
 	{
@@ -47,17 +48,16 @@ public class MessageHandler {
 		}
 	}
 	
-	
-	
-	/*
-	 * Send message directly to private channel
+	/**
+	 * Method for sending a private
+	 * message directly to private channel
 	 * 
-	 * @param PrivateChannel channelIn		channel to send message to.
+	 * @param channelIn	Channel to send message to.
 	 * 
-	 * @param String msgIn					message to be sent.
+	 * @param msgIn		Message to be sent.
 	 */
-	public static void sendMsgPrivate(PrivateChannel channelIn, String msgIn) {
-		
+	public static void sendMsgPrivate(PrivateChannel channelIn, String msgIn)
+	{
 		for(String msgChunk : msgIn.split("(?<=\\G.{" + CHAR_LIMIT + "})"))
 		{
 			//Send in discord-safe chunks
@@ -66,13 +66,15 @@ public class MessageHandler {
 		}
 	}
 	
-	/*
-	 * Send message to user via name
+	/**
+	 * Method for sending a private
+	 * message to a user via name.
 	 * 
-	 * @param String nameIn		name of user to send message to.
-	 * @param String msgIn		message to be sent to the user.
+	 * @param nameIn	Name of user to send message to.
+	 * @param msgIn		Message to be sent to the user.
 	 * 
-	 * @param int userLimit		number of users with matching names to send message to	0 = unlimited
+	 * @param userLimit	Number of users with matching names
+	 * 					to send message to(0 == unlimited).
 	 */
 	public static void sendMsgPrivateByName(String nameIn, String msgIn, int userLimit) {
 		
@@ -104,12 +106,12 @@ public class MessageHandler {
 	}
 	
 	
-	/*
-	 * Send message directly to guild channel
+	/**
+	 * Method for sending a message
+	 * directly to a guild channel
 	 * 
-	 * @param TextChannel channelIn		channel to send the message to.
-	 * 
-	 * @param String msgIn				message to be sent.
+	 * @param channelIn	Channel to send the message to.
+	 * @param msgIn		Message to be sent.
 	 */
 	public static void sendMsgGuild(TextChannel channelIn, String msgIn) {
 		
@@ -121,15 +123,19 @@ public class MessageHandler {
 		}
 	}
 	
-	/*
-	 * Send message to guild via name
+	/**
+	 * Method for sending a message to a
+	 * guild via name.
 	 * 
-	 * @param String guildIn	name of guild to send message to.
-	 * @param String channelIn	name of channel to send message in.
-	 * @param String msgIn		message to be sent.
+	 * @param guildIn		Name of guild to send message to.
+	 * @param channelIn		Name of channel to send message in.
+	 * @param msgIn			Message to be sent.
 	 * 
-	 * @param int guildLimit	number of guild(s) with matching names to send it to .			0 = unlimited
-	 * @param int channelLimit	number of channel(s) with matching names to send message in.	0 = unlimited
+	 * @param guildLimit	Number of guild(s) with matching names
+	 * 						to send it to(0 = unlimited).
+	 * 
+	 * @param channelLimit	Number of channels(s) with matching names
+	 * 						to send it in(0 = unlimited).
 	 */
 	public static void sendMsgGuildByName(String guildIn, String channelIn, String msgIn, int guildLimit, int channelLimit)
 	{

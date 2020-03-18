@@ -3,11 +3,11 @@ package src.me.gannonburks.micromanage.command.commands;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
-import src.me.gannonburks.micromanage.command.Command;
+import src.me.gannonburks.micromanage.command.BotCommand;
 import src.me.gannonburks.micromanage.module.ModuleRegistry;
 import src.me.gannonburks.micromanage.util.MessageHandler;
 
-public class HelpCommand extends Command {
+public class HelpCommand extends BotCommand {
 
 	public HelpCommand(String label, String description, boolean canFireInGuild, boolean canFireInPrivate, boolean canFireInConsole, boolean canDisable)
 	{
@@ -19,9 +19,9 @@ public class HelpCommand extends Command {
 	{
 		MessageHandler.sendMsgGuild(channel, "List Of Commands:");
 		
-		for(Command command : ModuleRegistry.getAllGuildCommands())
+		for(BotCommand command : ModuleRegistry.getAllGuildCommands())
 		{
-			MessageHandler.sendMsgGuild(channel, "   >" + command.getLabel() + " - " + command.getDescription());
+			MessageHandler.sendMsgGuild(channel, "> " + command.getLabel() + " - " + command.getDescription());
 		}
 	}
 	
@@ -30,9 +30,9 @@ public class HelpCommand extends Command {
 	{
 		MessageHandler.sendMsgPrivate(channel, "List Of Commands:");
 		
-		for(Command command : ModuleRegistry.getAllPrivateCommands())
+		for(BotCommand command : ModuleRegistry.getAllPrivateCommands())
 		{
-			MessageHandler.sendMsgPrivate(channel, "   >" + command.getLabel() + " - " + command.getDescription());
+			MessageHandler.sendMsgPrivate(channel, "> " + command.getLabel() + " - " + command.getDescription());
 		}
 	}
 	
@@ -41,9 +41,9 @@ public class HelpCommand extends Command {
 	{
 		System.out.println("List Of Commands:");
 		
-		for(Command command : ModuleRegistry.getAllConsoleCommands())
+		for(BotCommand command : ModuleRegistry.getAllConsoleCommands())
 		{
-			System.out.println("   >" + command.getLabel() + " - " + command.getDescription());
+			System.out.println("> " + command.getLabel() + " - " + command.getDescription());
 		}
 	}
 }

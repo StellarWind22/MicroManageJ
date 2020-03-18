@@ -6,64 +6,164 @@ import java.util.Collections;
 import javax.annotation.Nonnull;
 
 import net.dv8tion.jda.internal.utils.Checks;
-import src.me.gannonburks.micromanage.command.Command;
+import src.me.gannonburks.micromanage.command.BotCommand;
 import src.me.gannonburks.micromanage.event.BotEvent;
 
-public class Module implements IModule {
+public final class Module implements IModule {
 
 	private String name;
+	private String version;
+	private String author;
+	private String description;
+	private String issue_url;
 	
-	private ArrayList<Command> commands = new ArrayList<Command>();
-	private ArrayList<BotEvent> events = new ArrayList<BotEvent>();
+	private ArrayList<BotCommand> moduleCommands = new ArrayList<BotCommand>();
+	private ArrayList<BotEvent> moduleEvents = new ArrayList<BotEvent>();
 	
-	public Module(String nameIn)
+	/**
+	 * Constructor for Module class.
+	 * 
+	 * @param name			Name of the module.
+	 * @param version		Version of the module.
+	 * @param author		Author of the module.
+	 * @param description	Description of the module.
+	 * @param issue_url		Issue url for the module(Should be repo issues tab).
+	 */
+	public Module(String name, String version, String author, String description, String issue_url)
 	{
-		this.name = nameIn;
+		this.name = name;
+		this.version = version;
+		this.author = author;
+		this.description = description;
+		this.issue_url = issue_url;
 	}
 	
-	//Name getter
+	/**
+	 * Method for getting the name of the
+	 * module.
+	 * 
+	 * @return Name of the module.
+	 */
 	public String getName()
 	{
 		return this.name;
 	}
 	
-	//Commands Getter
-	public ArrayList<Command> getCommands()
+	/**
+	 * Method for getting the version of
+	 * the module.
+	 * 
+	 * @return Version of the module.
+	 */
+	public String getVersion()
 	{
-		return this.commands;
+		return this.version;
 	}
 	
-	//Event getter
+	/**
+	 * Method for getting the author of
+	 * the module.
+	 * 
+	 * @return Author of the module.
+	 */
+	public String getAuthor()
+	{
+		return this.author;
+	}
+	
+	/**
+	 * Method for getting the description for
+	 * the module.
+	 * 
+	 * @return Name description of the module.
+	 */
+	public String getDescription()
+	{
+		return this.description;
+	}
+	
+	/**
+	 * Method for getting the issue tracker url
+	 * for the module.
+	 * 
+	 * @return Issue tracker url of the module.
+	 */
+	public String getIssueUrl()
+	{
+		return this.issue_url;
+	}
+	
+	/**
+	 * Method for getting all commands packaged
+	 * inside a module.
+	 * 
+	 * @return	Mutable list of all commands.
+	 */
+	public ArrayList<BotCommand> getCommands()
+	{
+		return this.moduleCommands;
+	}
+	
+	/**
+	 * Method for getting all events packaged
+	 * inside a module.
+	 * 
+	 * @return Mutable list of all events.
+	 */
 	public ArrayList<BotEvent> getEvents()
 	{
-		return this.events;
+		return this.moduleEvents;
 	}
 	
-	//Register all commands
-	public void registerAllCommands(@Nonnull Command... commandsIn)
+	/**
+	 * Method for mass packaging commands into
+	 * the module.
+	 * 
+	 * @param	commands Vararg of command instances to
+	 * 			be packaged into module.
+	 */
+	public void packageAllCommands(@Nonnull BotCommand... commands)
 	{
-		Checks.noneNull(commandsIn, "commandsIn");
+		Checks.noneNull(commands, "commands");
 		
-		Collections.addAll(commands, commandsIn);
+		Collections.addAll(moduleCommands, commands);
 	}
 	
-	//Register all commands
-	public void registerAllEvents(@Nonnull BotEvent... botEventsIn)
+	/**
+	 * Method for mass packaging events into
+	 * the module.
+	 * 
+	 * @param	commands Vararg of event instances to
+	 * 			be packaged into module.
+	 */
+	public void packageAllEvents(@Nonnull BotEvent... botEvents)
 	{
-		Checks.noneNull(botEventsIn, "botEventsIn");
+		Checks.noneNull(botEvents, "botEvents");
 			
-		Collections.addAll(events, botEventsIn);
+		Collections.addAll(moduleEvents, botEvents);
 	}
 	
-	//Get all commands
-	public ArrayList<Command> getAllCommands()
+	/**
+	 * Method for getting all commands that
+	 * are packaged in the module.
+	 * 
+	 * @return	Mutable list of all packaged
+	 * 			command instances.
+	 */
+	public ArrayList<BotCommand> getAllCommands()
 	{
-		return this.commands;
+		return this.moduleCommands;
 	}
 	
-	//Get all events
+	/**
+	 * Method for getting all events that
+	 * are packaged in the module
+	 * 
+	 * @return	Mutable list of all packaged
+	 * 			event instances.
+	 */
 	public ArrayList<BotEvent> getAllEvents()
 	{
-		return this.events;
+		return this.moduleEvents;
 	}
 }

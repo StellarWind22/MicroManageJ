@@ -3,10 +3,10 @@ package src.me.gannonburks.micromanage.command.commands;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
-import src.me.gannonburks.micromanage.command.Command;
+import src.me.gannonburks.micromanage.command.BotCommand;
 import src.me.gannonburks.micromanage.util.MessageHandler;
 
-public class EchoCommand extends Command {
+public class EchoCommand extends BotCommand {
 
 	public EchoCommand(String label, String description, boolean canFireInGuild, boolean canFireInPrivate, boolean canFireInConsole, boolean canDisable)
 	{
@@ -34,6 +34,6 @@ public class EchoCommand extends Command {
 	{
 		String msg = String.join(" ", args).trim();
 		
-		System.out.println(msg);
+		System.out.println("@Console " + msg);
 	}
 }

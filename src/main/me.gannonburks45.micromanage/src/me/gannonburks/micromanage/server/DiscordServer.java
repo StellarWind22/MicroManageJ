@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 
-public class Server {
+public final class DiscordServer {
 
 	private String name;
 	
@@ -15,7 +15,7 @@ public class Server {
 	
 	private Guild guild;
 	
-	public Server(Guild guildIn)
+	public DiscordServer(Guild guildIn)
 	{
 		this.guild = guildIn;
 		
@@ -24,25 +24,48 @@ public class Server {
 		this.vocChannels = guildIn.getVoiceChannels();
 	}
 	
-	//Returns this server's JDA guild object.
+	/**
+	 * Method for getting JDA's guild object
+	 * form of the server.
+	 * 
+	 * @return Guild object of the server.
+	 */
 	public Guild getGuild()
 	{
 		return this.guild;
 	}
 	
-	//Returns this server's name
+	/**
+	 * Method for getting the server's name.
+	 * 
+	 * @return The name of the server.
+	 */
 	public String getName()
 	{
 		return this.name;
 	}
 	
-	//Getter for text channels
+	/**
+	 * Method for getting all the text channels
+	 * in a server so you don't have to use getGuild()
+	 * very often.
+	 * 
+	 * @return	Mutable array of all text channels in
+	 * 			the server.
+	 */
 	public List<TextChannel> getTextChannels()
 	{
 		return this.txtChannels;
 	}
 	
-	//Getter for voice channels
+	/**
+	 * Method for getting all the voice channels
+	 * in a server so you don't have to use getGuild()
+	 * very often.
+	 * 
+	 * @return	Mutable array of all voice channels in
+	 * 			the server.
+	 */
 	public List<VoiceChannel> getVoiceChannels()
 	{
 		return this.vocChannels;

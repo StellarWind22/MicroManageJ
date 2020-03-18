@@ -17,28 +17,28 @@ import org.json.simple.parser.ParseException;
 
 import net.dv8tion.jda.api.entities.User;
 import src.me.gannonburks.micromanage.Main;
-import src.me.gannonburks.micromanage.command.Command;
+import src.me.gannonburks.micromanage.command.BotCommand;
 import src.me.gannonburks.micromanage.module.ModuleRegistry;
-import src.me.gannonburks.micromanage.server.Server;
+import src.me.gannonburks.micromanage.server.DiscordServer;
 
 public final class SettingsReader {
 	
-	private final static String SETTINGS_FOLDER = "/settings/";
+	private final static String SETTINGS_FOLDER = "../settings/";
 	
 	//get join date
-	public static Timestamp getJoinDate(Server server)
+	public static Timestamp getJoinDate(DiscordServer server)
 	{
 		return Timestamp.valueOf(safeParseSettingsFile(server).get("joined").toString());
 	}
 	
 	//get prefix for server
-	public static String getPrefix(Server server)
+	public static String getPrefix(DiscordServer server)
 	{
 		return safeParseSettingsFile(server).get("prefix").toString();
 	}
 	
 	//return if command is disabled
-	public static boolean isDisabedIn(Server server, Command command)
+	public static boolean isDisabedIn(DiscordServer server, BotCommand command)
 	{
 		JSONObject[] commands = (JSONObject[]) ((JSONArray)safeParseSettingsFile(server).get("commands")).toArray();
 		String label = command.getLabel();
@@ -56,7 +56,7 @@ public final class SettingsReader {
 	}
 	
 	//return timestamp of last change to command
-	public static Timestamp getLastChanged(Server server, Command command)
+	public static Timestamp getLastChanged(DiscordServer server, BotCommand command)
 	{
 		JSONObject[] commands = (JSONObject[]) ((JSONArray)safeParseSettingsFile(server).get("commands")).toArray();
 		String label = command.getLabel();
@@ -74,7 +74,7 @@ public final class SettingsReader {
 	}
 	
 	//get the user that changed that command
-	public static User getLastChangedBy(Server server, Command command)
+	public static User getLastChangedBy(DiscordServer server, BotCommand command)
 	{
 		JSONObject[] commands = (JSONObject[]) ((JSONArray)safeParseSettingsFile(server).get("commands")).toArray();
 		String label = command.getLabel();
@@ -93,7 +93,7 @@ public final class SettingsReader {
 	
 	//set values
 	@SuppressWarnings("unchecked")
-	public static boolean setPrefix(Server server, String newPrefix)
+	public static boolean setPrefix(DiscordServer server, String newPrefix)
 	{
 		JSONObject settingsFile = (JSONObject)safeParseSettingsFile(server);
 		
@@ -103,7 +103,7 @@ public final class SettingsReader {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static boolean setDisabledIn(Server server, Command command, User sender, boolean isDisabled)
+	public static boolean setDisabledIn(DiscordServer server, BotCommand command, User sender, boolean isDisabled)
 	{
 		if(!(command.canDisable()))
 		{
@@ -131,7 +131,7 @@ public final class SettingsReader {
 	}
 	
 	//ensureFile
-	public static File ensureFile(Server server, Path path)
+	public static File ensureFile(DiscordServer server, Path path)
 	{
 		if(Files.notExists(path))
 		{
@@ -143,9 +143,9 @@ public final class SettingsReader {
 	
 	//generate
 	@SuppressWarnings("unchecked")
-	public static void generateSettings(Server server, Path path)
+	public static void generateSettings(DiscordServer server, Path path)
 	{
-		ArrayList<Command> commands = ModuleRegistry.getAllGuildCommands();
+		ArrayList<BotCommand> commands = ModuleRegistry.getAllGuildCommands();
 		ArrayList<JSONObject> commandsJson = new ArrayList<JSONObject>();
 		
 		//Create main file object
@@ -156,7 +156,7 @@ public final class SettingsReader {
 		settingsFile.put("joined", new Timestamp(System.currentTimeMillis()));
 		
 		//Generate all the command json objects
-		for(Command command : commands)
+		for(BotCommand command : commands)
 		{
 			//Create Objects
 			JSONObject commandJsonDetails = new JSONObject();
@@ -208,7 +208,7 @@ public final class SettingsReader {
 	}
 	
 	//Parse file into JSONObject
-	public static JSONObject parseSettingsFile(Server server) throws ParseException
+	public static JSONObject parseSettingsFile(DiscordServer server) throws ParseException
 	{
 		try {
 			//Read In File
@@ -224,7 +224,7 @@ public final class SettingsReader {
 	}
 	
 	//Parse file into JSONObject with extra parseerror handling stuff
-	public static JSONObject safeParseSettingsFile(Server server)
+	public static JSONObject safeParseSettingsFile(DiscordServer server)
 	{
 		try
 		{
@@ -247,7 +247,7 @@ public final class SettingsReader {
 		}
 	}
 	
-	public static boolean overwriteSettingsFile(JSONObject parsedFile, Server server)
+	public static boolean overwriteSettingsFile(JSONObject parsedFile, DiscordServer server)
 	{
 		Path path = Paths.get(SETTINGS_FOLDER + server.getName() + ".json");
 		
