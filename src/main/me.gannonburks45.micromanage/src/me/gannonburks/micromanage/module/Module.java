@@ -9,8 +9,8 @@ import net.dv8tion.jda.internal.utils.Checks;
 import src.me.gannonburks.micromanage.command.BotCommand;
 import src.me.gannonburks.micromanage.event.BotEvent;
 
-public final class Module implements IModule {
-
+public final class Module
+{
 	private String name;
 	private String version;
 	private String author;

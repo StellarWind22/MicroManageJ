@@ -10,8 +10,8 @@ import src.me.gannonburks.micromanage.command.BotCommand;
 import src.me.gannonburks.micromanage.event.BotEvent;
 import src.me.gannonburks.micromanage.util.Logger;
 
-public final class ModuleRegistry {
-
+public final class ModuleRegistry
+{
 	private static ArrayList<Module> moduleRegistry = new ArrayList<Module>();	//Array of module instances.
 	
 	/**

@@ -1,10 +1,13 @@
 package src.me.gannonburks.micromanage.server;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.VoiceChannel;
+import src.me.gannonburks.micromanage.command.BotCommand;
 
 public final class DiscordServer {
 
@@ -15,6 +18,13 @@ public final class DiscordServer {
 	
 	private Guild guild;
 	
+	/**
+	 * Constructor for server class, takes
+	 * in a JDA Guild object and turns it into
+	 * a server instance for the server registry.
+	 * 
+	 * @param guildIn Guild for the server object.
+	 */
 	public DiscordServer(Guild guildIn)
 	{
 		this.guild = guildIn;
@@ -69,5 +79,93 @@ public final class DiscordServer {
 	public List<VoiceChannel> getVoiceChannels()
 	{
 		return this.vocChannels;
+	}
+	
+	/**
+	 * Method for getting a timestamp of the date
+	 * the bot joined the server.
+	 * 
+	 * @return Timestamp of join date.
+	 */
+	public Timestamp getJoinDate()
+	{
+		return SettingsReader.getJoinDate(this);
+	}
+	
+	/**
+	 * Method for getting prefix of a server
+	 * 
+	 * @return Prefix of the server.
+	 */
+	public String getPrefix()
+	{
+		return SettingsReader.getPrefix(this);
+	}
+	
+	/**
+	 * Method for checking if a command is
+	 * disabled in the server.
+	 * 
+	 * @param command Command to check for.
+	 * 
+	 * @return If command is disabled.
+	 */
+	public boolean isDisabled(BotCommand command)
+	{
+		return SettingsReader.isDisabedIn(this, command);
+	}
+	
+	/**
+	 * Method for getting timestamp of date
+	 * the command was last changed by anyone.
+	 * 
+	 * @param command Command to get timestamp for.
+	 * 
+	 * @return Timestamp of changed date.
+	 */
+	public Timestamp getLastChanged(BotCommand command)
+	{
+		return SettingsReader.getLastChanged(this, command);
+	}
+	
+	/**
+	 * Method for getting the JDA User object
+	 * of the last user who changed the command
+	 * settings.
+	 * 
+	 * @param command Command to check for.
+	 * 
+	 * @return JDA User object of user who last changed it.
+	 */
+	public User getLastChangedBy(BotCommand command)
+	{
+		return SettingsReader.getLastChangedBy(this, command);
+	}
+	
+	/**
+	 * Method for setting the servers prefix.
+	 * 
+	 * @param prefix New prefix to change it to
+	 * 
+	 * @return If the operation succeeded.
+	 */
+	public boolean SetPrefix(String prefix)
+	{
+		return SettingsReader.setPrefix(this, prefix);
+	}
+	
+	/**
+	 * Method for setting a command's disabled
+	 * status.
+	 * 
+	 * @param command		Command to change.
+	 * @param sender		User that requested it.
+	 * @param isDisabled	Value to change it to.
+	 * 
+	 * @return				If the operation succeeded.
+	 */
+	public boolean setDisabled(BotCommand command, User sender, boolean isDisabled)
+	{
+		return SettingsReader.setDisabledIn(this, command, sender, isDisabled);
 	}
 }

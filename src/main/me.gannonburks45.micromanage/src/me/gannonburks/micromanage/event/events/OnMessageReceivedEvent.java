@@ -3,7 +3,6 @@ package src.me.gannonburks.micromanage.event.events;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import src.me.gannonburks.micromanage.Main;
-import src.me.gannonburks.micromanage.command.BotCommand;
 import src.me.gannonburks.micromanage.command.BotCommandHandler;
 import src.me.gannonburks.micromanage.event.BotEvent;
 import src.me.gannonburks.micromanage.module.ModuleRegistry;
@@ -11,7 +10,6 @@ import src.me.gannonburks.micromanage.server.DiscordServer;
 import src.me.gannonburks.micromanage.server.ServerRegistry;
 import src.me.gannonburks.micromanage.util.Logger;
 import src.me.gannonburks.micromanage.util.MessageHandler;
-import src.me.gannonburks.micromanage.util.SettingsReader;
 
 public class OnMessageReceivedEvent extends BotEvent {
 
@@ -39,22 +37,12 @@ public class OnMessageReceivedEvent extends BotEvent {
 		{
 			String label = BotCommandHandler.getLabel(rawMessage, server);
 			String[] args = BotCommandHandler.getArgs(rawMessage, server);
-			String prefix = SettingsReader.getPrefix(server);
+			String prefix = server.getPrefix();
 			
-			if(ModuleRegistry.containsGuildCommand(label) && !(SettingsReader.isDisabedIn(server, ModuleRegistry.getGuildCommand(label))))
+			if(ModuleRegistry.containsGuildCommand(label) && !(server.isDisabled(ModuleRegistry.getGuildCommand(label))))
 			{
-				BotCommand command = ModuleRegistry.getGuildCommand(label);
-				
-				if(SettingsReader.isDisabedIn(server, command))
-				{
-					BotCommandHandler.execute(label, args, event.getAuthor(), event.getChannel());
-					return;
-				}
-				else
-				{
-					MessageHandler.sendMsgGuild(event.getChannel(), event.getAuthor().getAsMention() + " \"" + label + "\" is not a valid command, try \"" + prefix + "help\" for a list of commands.");
-					return;
-				}
+				BotCommandHandler.execute(label, args, event.getAuthor(), event.getChannel());
+				return;
 			}
 			else
 			{

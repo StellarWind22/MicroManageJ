@@ -10,8 +10,8 @@ public class Main {
 	public static JDA bot;
 	public static final String DEFAULT_PREFIX = "-";
 		
-	/*
-	 * PROGRAM ENTRY POINT
+	/**
+	 * Main method
 	 */
 	public static void main(String[] args)
 	{	

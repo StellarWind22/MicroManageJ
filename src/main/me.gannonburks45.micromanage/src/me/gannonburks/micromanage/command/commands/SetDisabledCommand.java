@@ -7,7 +7,6 @@ import src.me.gannonburks.micromanage.module.ModuleRegistry;
 import src.me.gannonburks.micromanage.server.DiscordServer;
 import src.me.gannonburks.micromanage.server.ServerRegistry;
 import src.me.gannonburks.micromanage.util.MessageHandler;
-import src.me.gannonburks.micromanage.util.SettingsReader;
 
 public class SetDisabledCommand extends BotCommand {
 
@@ -27,19 +26,28 @@ public class SetDisabledCommand extends BotCommand {
 			
 			if(ModuleRegistry.containsGuildCommand(label))
 			{
+				BotCommand command = ModuleRegistry.getGuildCommand(label);
 				String isDisabled = args[1];
 				
 				if(isDisabled.equalsIgnoreCase("true") || isDisabled.equalsIgnoreCase("false"))
 				{
-					if(SettingsReader.setDisabledIn(server, ModuleRegistry.getGuildCommand(label), sender, Boolean.parseBoolean(isDisabled)))
+					
+					if(command.canDisable())
 					{
-						MessageHandler.sendMsgGuild(channel, sender.getAsMention() + " The command \"" + label + "\" is now disabled!");
-						return;
+						if(server.setDisabled(ModuleRegistry.getGuildCommand(label), sender, Boolean.parseBoolean(isDisabled)))
+						{
+							MessageHandler.sendMsgGuild(channel, sender.getAsMention() + " The command \"" + label + "\" is now disabled!");
+							return;
+						}
+						else
+						{
+							MessageHandler.sendMsgGuild(channel, sender.getAsMention() + " Failed to disable \"" + label + "\"!");
+							return;
+						}
 					}
 					else
 					{
-						MessageHandler.sendMsgGuild(channel, sender.getAsMention() + " Failed to disable \"" + label + "\"!");
-						return;
+						MessageHandler.sendMsgGuild(channel, sender.getAsMention() + " The command \"" + label + "\" cannot be disabled!");
 					}
 				}
 				else
@@ -50,13 +58,13 @@ public class SetDisabledCommand extends BotCommand {
 			}
 			else
 			{
-				MessageHandler.sendMsgGuild(channel, sender.getAsMention() + " Invalid command label, try " + SettingsReader.getPrefix(server) + "help for a list of commands!");
+				MessageHandler.sendMsgGuild(channel, sender.getAsMention() + " Invalid command label, try " + server.getPrefix() + "help for a list of commands!");
 				return;
 			}
 		}
 		else
 		{
-			MessageHandler.sendMsgGuild(channel, sender.getAsMention() + " Invalid arguments, Usage:\"" + SettingsReader.getPrefix(server) + this.getLabel() + " <command to disable>\"!");
+			MessageHandler.sendMsgGuild(channel, sender.getAsMention() + "Usage:\"" + server.getPrefix() + this.getLabel() + " <label of command> <true || false>\"!");
 			return;
 		}
 	}

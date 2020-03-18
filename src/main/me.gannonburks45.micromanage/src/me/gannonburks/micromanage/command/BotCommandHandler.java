@@ -6,7 +6,6 @@ import net.dv8tion.jda.api.entities.User;
 import src.me.gannonburks.micromanage.Main;
 import src.me.gannonburks.micromanage.module.ModuleRegistry;
 import src.me.gannonburks.micromanage.server.DiscordServer;
-import src.me.gannonburks.micromanage.util.SettingsReader;
 
 public final class BotCommandHandler {
 
@@ -55,7 +54,7 @@ public final class BotCommandHandler {
 	{
 		if(server != null)
 		{
-			return rawCommand.replaceFirst(SettingsReader.getPrefix(server), "").split(" ")[0];
+			return rawCommand.replaceFirst(server.getPrefix(), "").split(" ")[0];
 		}
 		else
 		{
@@ -73,7 +72,7 @@ public final class BotCommandHandler {
 	{
 		if(server != null)
 		{
-			return rawCommand.replaceFirst(SettingsReader.getPrefix(server), "").replaceFirst(getLabel(rawCommand, server), "").trim().split(" ");
+			return rawCommand.replaceFirst(server.getPrefix(), "").replaceFirst(getLabel(rawCommand, server), "").trim().split(" ");
 		}
 		else
 		{
@@ -91,7 +90,7 @@ public final class BotCommandHandler {
 	{
 		if(server != null)
 		{
-			return rawCommand.startsWith(SettingsReader.getPrefix(server));
+			return rawCommand.startsWith(server.getPrefix());
 		}
 		else
 		{
