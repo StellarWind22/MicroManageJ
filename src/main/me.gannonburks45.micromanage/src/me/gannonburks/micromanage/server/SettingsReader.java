@@ -24,19 +24,41 @@ public final class SettingsReader {
 	
 	private final static String SETTINGS_FOLDER = "../settings/";
 	
-	//get join date
+	/**
+	 * Method for getting timestamp of the day
+	 * the bot joined the server.
+	 * 
+	 * @param server Server to get join date for.
+	 * 
+	 * @return Timestamp of join date.
+	 */
 	protected static Timestamp getJoinDate(DiscordServer server)
 	{
 		return Timestamp.valueOf(safeParseSettingsFile(server).get("joined").toString());
 	}
 	
-	//get prefix for server
+	/**
+	 * Method for getting the prefix from the
+	 * server settings .json file.
+	 * 
+	 * @param server Server to get prefix from.
+	 * 
+	 * @return Prefix of the server.
+	 */
 	protected static String getPrefix(DiscordServer server)
 	{
 		return safeParseSettingsFile(server).get("prefix").toString();
 	}
 	
-	//return if command is disabled
+	/**
+	 * Method for checking if a command is disabled
+	 * in the server.
+	 * 
+	 * @param server	Server to check in.
+	 * @param command	Command to check for.
+	 * 
+	 * @return If command is disabled
+	 */
 	protected static boolean isDisabedIn(DiscordServer server, BotCommand command)
 	{
 		JSONObject[] commands = (JSONObject[]) ((JSONArray)safeParseSettingsFile(server).get("commands")).toArray();
@@ -54,7 +76,15 @@ public final class SettingsReader {
 		return false;
 	}
 	
-	//return timestamp of last change to command
+	/**
+	 * Method for getting the timestamp of the date
+	 * that the command was last changed.
+	 * 
+	 * @param server	Server to check in.
+	 * @param command	Command to check for.
+	 * 
+	 * @return Last changed timestamp.
+	 */
 	protected static Timestamp getLastChanged(DiscordServer server, BotCommand command)
 	{
 		JSONObject[] commands = (JSONObject[]) ((JSONArray)safeParseSettingsFile(server).get("commands")).toArray();
@@ -72,7 +102,15 @@ public final class SettingsReader {
 		return null;
 	}
 	
-	//get the user that changed that command
+	/**
+	 * Method for getting the JDA User object
+	 * of the user that last changed it.
+	 * 
+	 * @param server	Server to look in.
+	 * @param command	Command to get from.
+	 * 
+	 * @return JDA User object if last edit was a user.
+	 */
 	protected static User getLastChangedBy(DiscordServer server, BotCommand command)
 	{
 		JSONObject[] commands = (JSONObject[]) ((JSONArray)safeParseSettingsFile(server).get("commands")).toArray();
@@ -90,7 +128,15 @@ public final class SettingsReader {
 		return null;
 	}
 	
-	//set values
+	/**
+	 * Method for changing the prefix setting
+	 * of a server
+	 * 
+	 * @param server	Server to change setting in.
+	 * @param newPrefix	Value to set prefix to.
+	 * 
+	 * @return If operation was successful.
+	 */
 	@SuppressWarnings("unchecked")
 	protected static boolean setPrefix(DiscordServer server, String newPrefix)
 	{
@@ -101,6 +147,17 @@ public final class SettingsReader {
 		return overwriteSettingsFile(settingsFile, server);
 	}
 	
+	/**
+	 * Method for changing the disabled status
+	 * of a command in a server.
+	 * 
+	 * @param server		Server to change setting in.
+	 * @param command		Command to change status of.
+	 * @param sender		User who requested this change.
+	 * @param isDisabled	Value to change it to.
+	 * 
+	 * @return If operation was successful.
+	 */
 	@SuppressWarnings("unchecked")
 	protected static boolean setDisabledIn(DiscordServer server, BotCommand command, User sender, boolean isDisabled)
 	{
@@ -129,7 +186,15 @@ public final class SettingsReader {
 		return false;
 	}
 	
-	//ensureFile
+	/**
+	 * Method for ensuring that a settings file exists
+	 * before reading from it.
+	 * 
+	 * @param server	Server to ensure settings file for.
+	 * @param path		Path of file.
+	 * 
+	 * @return File object for the file.
+	 */
 	private static File ensureFile(DiscordServer server, Path path)
 	{
 		if(Files.notExists(path))
@@ -140,7 +205,12 @@ public final class SettingsReader {
 	}
 	
 	
-	//generate
+	/**
+	 * Method for generating settings file for a server.
+	 * 
+	 * @param server	Server to generate file for.
+	 * @param path		Path of file.
+	 */
 	@SuppressWarnings("unchecked")
 	private static void generateSettings(DiscordServer server, Path path)
 	{
@@ -206,7 +276,16 @@ public final class SettingsReader {
 		}
 	}
 	
-	//Parse file into JSONObject
+	/**
+	 * Method for parsing the settings file
+	 * into a JSONObject.
+	 * 
+	 * @param server Server to parse file for.
+	 * 
+	 * @return JSONObject of the file.
+	 * 
+	 * @throws ParseException If json file is invalid.
+	 */
 	private static JSONObject parseSettingsFile(DiscordServer server) throws ParseException
 	{
 		try {
@@ -222,7 +301,15 @@ public final class SettingsReader {
 		}
 	}
 	
-	//Parse file into JSONObject with extra parseerror handling stuff
+	/**
+	 * Method for parsing the settings file
+	 * into a JSONObject with some extra error
+	 * handling stuff
+	 * 
+	 * @param server Server to parse file for.
+	 * 
+	 * @return JSONObject if it worked.
+	 */
 	private static JSONObject safeParseSettingsFile(DiscordServer server)
 	{
 		try
@@ -246,6 +333,15 @@ public final class SettingsReader {
 		}
 	}
 	
+	/**
+	 * Method for overwriting the settings
+	 * file with a new JSONObject.
+	 * 
+	 * @param parsedFile	JSONObject to overwrite file with.
+	 * @param server		Server to overwrite the file of.
+	 * 
+	 * @return If operation was successful.
+	 */
 	private static boolean overwriteSettingsFile(JSONObject parsedFile, DiscordServer server)
 	{
 		Path path = Paths.get(SETTINGS_FOLDER + server.getName() + ".json");
