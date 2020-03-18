@@ -13,10 +13,7 @@ public interface IBotCommand {
 	 * @param sender 	User who sent this command.
 	 * @param channel 	Channel of the guild that this will execute in.
 	 */
-	default void fireInGuild(String[] args, User sender, TextChannel channel)
-	{
-		return;	
-	}
+	default void fireInGuild(String[] args, User sender, TextChannel channel) {}
 	
 	/**
 	 * Method that fires a command event in a PrivateChannel for private messaging.
@@ -25,18 +22,12 @@ public interface IBotCommand {
 	 * @param sender 	User who sent this command.
 	 * @param channel 	Private channel that the command will execute in.
 	 */
-	default void fireInPrivate(String[] args, User sender, PrivateChannel channel)
-	{
-		return;	
-	}
+	default void fireInPrivate(String[] args, User sender, PrivateChannel channel) {}
 	
 	/**
 	 * Method that fires a command event in a PrivateChannel for private messaging.
 	 * 
 	 * @param args 	arguments for the command.
 	 */
-	default void fireInConsole(String[] args)
-	{
-		return;
-	}
+	default void fireInConsole(String[] args) {}
 }
